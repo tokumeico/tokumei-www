@@ -1,0 +1,90 @@
+@font-face {
+  font-family: "DejaVu Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url(/font/dejavu/DejaVuSans.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "DejaVu Sans Extra Light";
+  font-style: normal;
+  font-weight: 100;
+  src: url(/font/dejavu/DejaVuSans-ExtraLight.ttf) format("truetype");
+}
+
+html {
+  font-family: "DejaVu Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .brand-logo {
+  font-family: "DejaVu Sans Extra Light", sans-serif;
+}
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+  font-size: inherit;
+}
+
+.brand-logo img {
+  display: inline-block;
+  height: 1.5em;
+  margin-bottom: -0.4em;
+  margin-right: 0.6em;
+}
+
+select {
+  display: none;
+}
+select:focus {
+  outline: 1px solid #ff80ab;
+}
+
+.flag {
+  height: 1em;
+}
+
+.collection-item span {
+  margin-right: 1em;
+}
+
+code pre {
+  width: 100%;
+  padding: 0.5em;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);
+  background-color: #424242;
+  color: #eeeeee;
+}
+
+.parallax-container {
+  height: 250px;
+  color: #FFF;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+}
+
+#index-banner {
+  background-image: url('/img/background0.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+#bg1 {
+  background-image: url('/img/background1.jpg');
+}
+#bg2 {
+  background-image: url('/img/background2.jpg');
+}
+
+#index-banner .btn-large {
+  margin: 0.5em;
+}
+
+.slider, .slides {
+  background-color: initial !important;
+}
+
+.slider .slides li img {
+  background-size: contain;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+
+  <title>Tokumei &middot; Anonymous microblogging</title>
+  <meta name="description" content="What you have to say is more important than who you are — let your voice be heard.">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+
+  <link href="/css/materialdesignicons.min.css" text="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body>
+  <nav class="pink" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/" class="brand-logo white-text">
+        <img src="/img/logo.png" alt="Tokumei" />
+        <span>Tokumei</span>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a></li>
+        <li><a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a></li>
+      </ul>
+      <ul id="nav-mobile" class="side-nav">
+        <a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a>
+        <a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi mdi-menu"></i></a>
+    </div>
+  </nav>
+
+  <div class="container section">
+    <h1>API</h1>
+    <img class="responsive-img" src="/img/xml_ascent.png" alt="XML sucks: The Ascent of Ward" />
+    <p>Hate XML? You'll love Tokumei's API.</p>
+
+    <hr><p>Replace <code>http://example.onion</code> with the location of the <a href="/sites/" class="pink-text">Tokumei site</a> you're using.</p>
+
+    <h3>Read</h3>
+    <p>Just GET these simple files:</p>
+    <ul>
+      <li><code>http://example.onion/p/1.txt:</code> Plain text contents of post #1. IDs start at 1.</li>
+      <li><code>http://example.onion/p/1_werc/tags:</code> Post #1's tags. One per line.</li>
+      <li><code>http://example.onion/p/1_werc/spam:</code> Number of times post #1 has been flagged as spam.</li>
+      <li><code>http://example.onion/p/1_werc/replies/0:</code> Plain text contents of reply #0 to post #1. IDs start at 0.</li>
+      <li><code>http://example.onion/p/1_werc/postnum:</code> Post #1's most recent reply ID, or number of replies minus 1.</li>
+      <li><code>http://example.onion/postnum:</code> Most recent post ID, or total number of posts (not including replies).</li>
+      <li><code>http://example.onion/_werc/tags/tokumei:</code> IDs of all posts tagged with #tokumei. One per line.</li>
+    </ul>
+
+    <p>You can check the modify timestamp in a post or reply file's metadata to see when it was created.</p>
+
+    <h3>Write</h3>
+    <p>Just POST these fields to <code>http://example.onion/p/</code>:</p>
+    <ul>
+      <li><h4>New post</h4>
+          <code>comment:</code> the post text<br />
+          <code>tags:</code> space-separated tags (optional)<br />
+          <code>password:</code> deletion password (optional)</li>
+      <li><h4>Reply</h4>
+          <code>comment:</code> the reply text<br />
+          <code>parent:</code> the post to reply to</li>
+    </ul>
+
+    <h2>Examples</h2>
+
+    <p>Working with Tokumei's API in another language? Send some example code to <a href="mailto:hello@tokumei.co" class="pink-text">hello@tokumei.co</a> and we'll add it here.</p>
+
+    <h3><a href="http://rc.cat-v.org/" class="pink-text">rc shell</a></h3>
+
+    <h5>Get the text of every post tagged with #tokumei:</h5>
+    <pre><code>for(i in `{curl http://example.onion/_werc/tags/tokumei})
+    curl http://example.onion/p/$i.txt</code></pre>
+
+    <h5>Get the creation date of post #1 in seconds since Epoch:</h5>
+    <pre><code>wget http://example.onion/p/1.txt
+stat -c %Y 1.txt</code></pre>
+
+    <h5>Create a new post:</h5>
+    <pre><code>curl -d 'comment=First line%0ASecond line' \
+     -d 'tags=firsttag secondtag' \
+     -d 'password=supersecret' \
+     http://example.onion/p/</code></pre>
+
+    <h5>Reply to post #1:</h5>
+    <pre><code>curl -d 'comment=First line%0ASecond line' \
+     -d 'parent=1' \
+     http://example.onion/p/</code></pre>
+
+    <h3>Java / Qt Jambi</h3>
+
+    <p>There is a partial reference client in Java: <a href="https://kfarwell.org/projects/toqumei/" class="pink-text">Toqumei</a>.</p>
+
+    <img src="/img/toqumei.png" alt="Toqumei" class="responsive-img" />
+  </div>
+
+  <footer class="page-footer pink">
+    <div class="container">
+      <div class="row">
+        <div class="col m6 s12">
+          <h5 class="white-text">Disclaimer</h5>
+          <p class="grey-text text-lighten-4">Public Tokumei sites indexed here are run by third parties. Use at your own discretion. We do not run or recommend an official Tokumei site. We are not responsible for any content hosted by third-party sites.</p>
+        </div>
+        <div class="col m2 offset-m2 s6">
+          <ul>
+            <li><a class="white-text" href="mailto:hello@tokumei.co">Contact</a></li>
+            <li><a class="white-text" href="http://tokumeiobg3bqngg.onion/">Tor</a></li>
+            <li><a class="white-text" href="http://tokumei.i2p/">I2P</a></li>
+          </ul>
+        </div>
+        <div class="col m2 s6">
+          <ul>
+            <li><a class="white-text" href="/donate">Donate</a></li>
+            <li><a class="white-text" href="https://kfarwell.org/projects/tokumei/git/">Code</a></li>
+            <li><a class="white-text" href="/api">API</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <a href="https://kfarwell.org/" class="pink-text text-lighten-3">Kyle Farwell</a> | <a href="https://krourke.org/" class="pink-text text-lighten-3">Keefer Rourke</a> | <a href="http://phil.guhnoo.org/" class="pink-text text-lighten-3">Phil St. Antoine</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/jquery-2.1.1.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/init.js"></script>
+</body>
+</html>

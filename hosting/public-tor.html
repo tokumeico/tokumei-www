@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+
+  <title>Tokumei &middot; Anonymous microblogging</title>
+  <meta name="description" content="What you have to say is more important than who you are — let your voice be heard.">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+
+  <link href="/css/materialdesignicons.min.css" text="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body>
+  <nav class="pink" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/" class="brand-logo white-text">
+        <img src="/img/logo.png" alt="Tokumei" />
+        <span>Tokumei</span>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a></li>
+        <li class="active"><a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a></li>
+      </ul>
+      <ul id="nav-mobile" class="side-nav">
+        <a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a>
+        <a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi mdi-menu"></i></a>
+    </div>
+  </nav>
+
+  <div class="container section">
+    <h1>Host your own public Tokumei site</h1>
+    <ol>
+      <h3 id="1"><li>Log into a Unix-like server</li></h3>
+      <p>You should be able to run Tokumei on GNU/Linux (x86, x86-64, PowerPC, and ARM), FreeBSD (x86, x86-64), Mac OS X (x86 and PowerPC), NetBSD (x86 and PowerPC), OpenBSD (x86 and PowerPC), and SunOS (Sparc). These instructions are written for Debian 8; you may need to adapt them a bit for other systems.</p>
+
+      <h3 id="2"><li>Install dependencies</li></h3>
+      <code><pre>apt-get update
+apt-get install nginx 9base git golang</pre></code>
+
+      <h3 id="3"><li>Configure nginx<//li></h3>
+      <code><pre>mkdir /etc/nginx/ssl
+chmod -R 600 /etc/nginx/ssl
+openssl dhparam -out /etc/nginx/ssl/dhparams.pem 4096
+cat &lt;&lt;EOF &gt;/etc/nginx/sites-available/default
+server {
+    server_name tokumei.example.com www.tokumei.example.com; # CHANGEME
+    return 301 https://\$host\$request_uri;
+
+    access_log off;
+    error_log off;
+}
+
+server {
+    listen 443;
+
+    ssl on;
+    ssl_certificate /etc/nginx/ssl/fullchain.pem;
+    ssl_certificate_key /etc/nginx/ssl/privkey.pem;
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+
+    add_header Strict-Transport-Security "max-age=31536000";
+
+    ssl_ciphers 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA';
+    ssl_dhparam /etc/nginx/ssl/dhparams.pem;
+
+    ssl_session_cache shared:SSL:10m;
+    ssl_session_timeout 10m;
+
+    server_name tokumei.example.com www.tokumei.example.com; # CHANGEME
+
+    access_log off;
+    error_log off;
+
+    root /var/www/tokumei/sites/\$host/;
+    index index.html;
+
+    location / {
+        try_files \$uri @werc;
+    }
+    location /pub/ {
+        root /var/www/tokumei;
+        try_files \$uri =404;
+    }
+    location = /favicon.ico {
+        root /var/www/tokumei;
+        try_files /var/www/tokumei/sites/\$host/\$uri /pub/default_favicon.ico =404;
+    }
+
+    error_page 404 = @werc;
+
+    location @werc {
+        include fastcgi_params;
+        fastcgi_pass localhost:3333;
+    }
+}
+EOF</pre></code>
+
+      <h3 id="4"><li>Get and install an SSL certificate</li></h3>
+      <p>If you already have one, place your certificate and private key into <b>/etc/nginx/ssl/fullchain.pem</b> and <b>/etc/nginx/ssl/privkey.pem</b>. Otherwise, follow these steps to get a certificate from Let's Encrypt.</p>
+      <code><pre>cd /opt
+git clone https://github.com/letsencrypt/letsencrypt
+cd letsencrypt
+service nginx stop
+./letsencrypt-auto certonly --standalone -d tokumei.example.com -d www.tokumei.example.com
+mv /etc/letsencrypt/live/tokumei.example.com/fullchain.pem /etc/letsencrypt/live/tokumei.example.com/privkey.pem /etc/apache2/ssl/
+service nginx start</pre></code>
+
+      <h3 id="5"><li>Install Tokumei</li></h3>
+
+      <code><pre>git clone https://git.kfarwell.org/tokumei /var/www/tokumei
+cd /var/www/tokumei/sites
+ln -s tokumei.co tokumei.example.com # CHANGEME
+ln -s tokumei.co www.tokumei.example.com # CHANGEME
+(crontab -l 2>/dev/null; echo '0 0 * * * /var/www/tokumei/bin/aux/trending.rc') | crontab -</pre></code>
+
+      <h3 id="6"><li>Install and start cgd</li></h3>
+      <code><pre>mkdir /usr/local/go
+GOPATH=/usr/local/go go get github.com/uriel/cgd
+/usr/local/go/bin/cgd -f -c /var/www/tokumei/bin/werc.rc >/dev/null &</pre></code>
+
+      <p>You should now have a Tokumei site running at https://tokumei.example.com and https://www.tokumei.example.com!</p>
+      <p>If you run into any problems, shoot us an email at <a href="mailto:help@tokumei.co" class="pink-text">help@tokumei.co</a>.</p>
+
+      <h3 id="7"><li>Submit your site to our directory</li></h3>
+      <p>If you want to be listed in our <a href="/sites/" class="pink-text">directory of public Tokumei sites</a>, send a link to your site to <a href="mailto:submit@tokumei.co" class="pink-text">submit@tokumei.co</a>.</p>
+
+      <h3 id="8"><li>Update Tokumei</li></h3>
+      <p>You should log in and run this periodically to update to the latest version of Tokumei and take advantage of security fixes and new features.</p>
+      <p>Email <a href="mailto:security@tokumei.co?subject=subscribe" class="pink-text">security@tokumei.co</a> to subscribe to our low-volume (zero vulnerabilities so far) security notice mailing list.</p>
+      <code><pre>cd /var/www/tokumei
+git pull</pre></code>
+
+      <h3 id="9"><li>Renew your SSL certificate</li></h3>
+      <p>You will need to log in and run this every three months to renew your Let's Encrypt certificate.</p>
+      <code><pre>cd /opt/letsencrypt
+service nginx stop
+./letsencrypt-auto certonly --standalone -d tokumei.example.com -d www.tokumei.example.com
+mv /etc/letsencrypt/live/tokumei.example.com/fullchain.pem /etc/letsencrypt/live/tokumei.example.com/privkey.pem /etc/apache2/ssl/
+service nginx start</pre></code>
+    </ol>
+  </div>
+
+  <footer class="page-footer pink">
+    <div class="container">
+      <div class="row">
+        <div class="col m6 s12">
+          <h5 class="white-text">Disclaimer</h5>
+          <p class="grey-text text-lighten-4">Public Tokumei sites indexed here are run by third parties. Use at your own discretion. We do not run or recommend an official Tokumei site. We are not responsible for any content hosted by third-party sites.</p>
+        </div>
+        <div class="col m2 offset-m2 s6">
+          <ul>
+            <li><a class="white-text" href="mailto:hello@tokumei.co">Contact</a></li>
+            <li><a class="white-text" href="http://tokumeiobg3bqngg.onion/">Tor</a></li>
+            <li><a class="white-text" href="http://tokumei.i2p/">I2P</a></li>
+          </ul>
+        </div>
+        <div class="col m2 s6">
+          <ul>
+            <li><a class="white-text" href="/donate">Donate</a></li>
+            <li><a class="white-text" href="https://kfarwell.org/projects/tokumei/git/">Code</a></li>
+            <li><a class="white-text" href="/api">API</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <a href="https://kfarwell.org/" class="pink-text text-lighten-3">Kyle Farwell</a> | <a href="https://krourke.org/" class="pink-text text-lighten-3">Keefer Rourke</a> | <a href="http://phil.guhnoo.org/" class="pink-text text-lighten-3">Phil St. Antoine</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/jquery-2.1.1.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/init.js"></script>
+</body>
+</html>
