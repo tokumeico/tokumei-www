@@ -21,8 +21,8 @@
       </a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a></li>
-        <li class="active"><a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a></li>
-        <li><a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a></li>
+        <li><a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a></li>
+        <li class="active"><a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a></li>
       </ul>
       <ul id="nav-mobile" class="side-nav">
         <a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a>
@@ -34,29 +34,28 @@
   </nav>
 
   <div class="container section">
-    <h1>Host your own private Tokumei site</h1>
-    <div class="row">
-      <div class="col s12 m6">
-        <div class="icon-block">
-          <a href="private-tor" class="pink-text">
-            <h2 class="center"><i class="mdi mdi-tor"></i></h2>
-            <h5 class="center">Tor</h5>
-          </a>
-          <p class="center">Create a Tor hidden service. This protects your anonymity as the site's host and prevents censorship, at the cost of making your site more difficult to access.</p>
-          <p class="center">We recommend Tor for better anonymity and free speech. Sites created as Tor hidden services are listed higher on our <a href="/sites/" class="pink-text">public site directory</a>.</p>
-        </div>
-      </div>
-      <div class="col s12 m6">
-        <div class="icon-block">
-          <a href="private-clearnet" class="pink-text">
-            <h2 class="center"><i class="mdi mdi-web"></i></h2>
-            <h5 class="center">Clearnet</h5>
-          </a>
-          <p class="center">Create a clearnet site. This does not protect your anonymity as the site's host and makes your site vulnerable to censorship, but makes your site easier for users to access.</p>
-          <p class="center">We recommend Tor over the clearnet for its better anonymity and free speech. Sites created on the clearnet are listed lower on our <a href="/sites/" class="pink-text">public site directory</a>.</p>
-        </div>
-      </div>
-    </div>
+    <h1>Getting started with advanced configuration</h1>
+    <p>After installing Tokumei, you may wish to do some additional configuration. This page will show you how to follow the configuration instructions in <a href="/wiki/" class="pink-text">our other guides</a>.</p>
+    <ol>
+      <h3 id="1"><li>Log in to your server</li></h3>
+      <p>TODO: how to ssh</p>
+      <p>Finally, <code>cd</code> to where Tokumei is installed. If you used the Tokumei installer, this should be <code>/var/www/tokumei</code>.</p>
+      <code><pre>cd /var/www/tokumei</pre></code>
+
+      <h3 id="2"><li>Edit files</li></h3>
+      <p>Let's take a look at the guide <i><a href="rmdonate" target="_blank" class="pink-text">Removing unused donation buttons</a></i> as an example. We'll pretend we want to remove the Bitcoin button.</p>
+      <p>This guide instructs us to edit <code>sites/tokumei.co/donate.tpl</code>. To do this, we'll use the text editor <i>nano</i>:</p>
+      <code><pre>nano sites/tokumei.co/donate.tpl</pre></code>
+      <p>We want to remove the following line:</p>
+      <code><pre>&lt;li&gt;&lt;h2&gt;Bitcoin (direct)&lt;/h2&gt;&lt;a href="bitcoin:%($bitcoin%)" class="btn-large waves-effect waves-light pink white-text"&gt;&lt;i class="mdi mdi-currency-btc left white-text"&gt;&lt;/i&gt;%($bitcoin%)&lt;/a&gt;&lt;/li&gt;</pre></code>
+      <p>This should be easy enough to find. Navigate down to it with the arrow keys. In a larger file, you could search for this line by pressing <code>Ctrl-w</code>, typing <code>Bitcoin</code>, and pressing <code>Enter</code>.</p>
+      <p>Once your cursor is on the right line, press <code>Ctrl-k</code> to delete it.</p>
+      <p>Once you're done in the file, press <code>Ctrl-x</code> and then <code>y</code> to save and quit. If you don't want to save your changes, press <code>Ctrl-x</code> and then <code>n</code>.</p>
+      <p>Using <i>nano</i> is reasonably intuitive, but if you get stuck you can press <code>Ctrl-g</code> for additional help.</p>
+
+      <h3 id="3"><li>There is no 3</li></h3>
+      <p>That's it! As soon as you're done in nano, your changes should take effect on your Tokumei site.</p>
+    </ol>
   </div>
   
   <footer class="page-footer pink">

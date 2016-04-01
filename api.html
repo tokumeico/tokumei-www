@@ -22,10 +22,12 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a></li>
         <li><a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a></li>
+        <li><a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a></li>
       </ul>
       <ul id="nav-mobile" class="side-nav">
         <a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a>
         <a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a>
+        <a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi mdi-menu"></i></a>
     </div>
@@ -71,23 +73,23 @@
     <h3><a href="http://rc.cat-v.org/" class="pink-text">rc shell</a></h3>
 
     <h5>Get the text of every post tagged with #tokumei:</h5>
-    <pre><code>for(i in `{curl http://example.onion/_werc/tags/tokumei})
-    curl http://example.onion/p/$i.txt</code></pre>
+    <code><pre>for(i in `{curl http://example.onion/_werc/tags/tokumei})
+    curl http://example.onion/p/$i.txt</pre></code>
 
     <h5>Get the creation date of post #1 in seconds since Epoch:</h5>
-    <pre><code>wget http://example.onion/p/1.txt
-stat -c %Y 1.txt</code></pre>
+    <code><pre>wget http://example.onion/p/1.txt
+stat -c %Y 1.txt</pre></code>
 
     <h5>Create a new post:</h5>
-    <pre><code>curl -d 'comment=First line%0ASecond line' \
+    <code><pre>curl -d 'comment=First line%0ASecond line' \
      -d 'tags=firsttag secondtag' \
      -d 'password=supersecret' \
-     http://example.onion/p/</code></pre>
+     http://example.onion/p/</pre></code>
 
     <h5>Reply to post #1:</h5>
-    <pre><code>curl -d 'comment=First line%0ASecond line' \
+    <code><pre>curl -d 'comment=First line%0ASecond line' \
      -d 'parent=1' \
-     http://example.onion/p/</code></pre>
+     http://example.onion/p/</pre></code>
 
     <h3>Java / Qt Jambi</h3>
 

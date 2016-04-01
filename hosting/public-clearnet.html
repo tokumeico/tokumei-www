@@ -22,127 +22,181 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a></li>
         <li class="active"><a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a></li>
+        <li><a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a></li>
       </ul>
       <ul id="nav-mobile" class="side-nav">
         <a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a>
         <a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a>
+        <a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a>
       </ul>
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi mdi-menu"></i></a>
     </div>
   </nav>
 
   <div class="container section">
-    <h1>Host your own public Tokumei site</h1>
+    <h1>Host your own public Tokumei site on the clearnet</h1>
     <ol>
-      <h3 id="1"><li>Log into a Unix-like server</li></h3>
-      <p>You should be able to run Tokumei on GNU/Linux (x86, x86-64, PowerPC, and ARM), FreeBSD (x86, x86-64), Mac OS X (x86 and PowerPC), NetBSD (x86 and PowerPC), OpenBSD (x86 and PowerPC), and SunOS (Sparc). These instructions are written for Debian 8; you may need to adapt them a bit for other systems.</p>
+      <h3 id="1"><li>Deploy a server</li></h3>
+      <p>We recommend renting a Finnish Debian 8 VPS with FlokiNET. Advanced users can use just about any Unix-like operating system on any server, but the automated Tokumei installer is only tested on Debian 8.</p>
+      <p>You can read about FlokiNET's dedication to free speech and privacy <a href="https://www.flokinet.is/en/AboutUs.php" target="_blank" class="pink-text">here</a>.</p>
 
-      <h3 id="2"><li>Install dependencies</li></h3>
-      <code><pre>apt-get update
-apt-get install nginx 9base git golang</pre></code>
+      <div class="center"><a href="https://www.billing.flokinet.com/aff.php?aff=55" target="_blank"><img src="/img/flokinet.png" /></a></div>
+      <div class="row">
+        <div class="col s12 l4">
+          <div class="card-panel">
+            <a href="https://www.billing.flokinet.com/aff.php?aff=55&pid=74" class="pink-text">
+              <h2 class="center">€15/mo</h5>
+              <h5 class="center">Finland VPS I</h5>
+            </a>
+            <p class="center">1 CPU Core / 1GB RAM / 20GB Storage</p>
+          </div>
+        </div>
+        <div class="col s12 l4">
+          <div class="card-panel">
+            <a href="https://www.billing.flokinet.com/aff.php?aff=55&pid=82" class="pink-text">
+              <h2 class="center">€29/mo</h5>
+              <h5 class="center">Finland VPS II</h5>
+            </a>
+            <p class="center">2 CPU Cores / 2GB RAM / 50GB Storage</p>
+          </div>
+        </div>
+        <div class="col s12 l4">
+          <div class="card-panel">
+            <a href="https://www.billing.flokinet.com/aff.php?aff=55&pid=83" class="pink-text">
+              <h2 class="center">€55/mo</h5>
+              <h5 class="center">Finland VPS III</h5>
+            </a>
+            <p class="center">3 CPU Cores / 4GB RAM / 90GB Storage</p>
+          </div>
+        </div>
+      </div>
 
-      <h3 id="3"><li>Configure nginx<//li></h3>
-      <code><pre>mkdir /etc/nginx/ssl
-chmod -R 600 /etc/nginx/ssl
-openssl dhparam -out /etc/nginx/ssl/dhparams.pem 4096
-cat &lt;&lt;EOF &gt;/etc/nginx/sites-available/default
-server {
-    server_name tokumei.example.com www.tokumei.example.com; # CHANGEME
-    return 301 https://\$host\$request_uri;
+      <p>After adding a VPS to your cart, you will need to configure it. Set your hostname and root password to whatever you like. Set your NS1 and NS2 prefixes to ns1 and ns2 respectively. Make sure your OS is set to Debian 8, and click <code>Continue</code>.</p>
+      <img src="/img/vps0.png" class="materialboxed responsive-img z-depth-1" /><br />
+      <p>Verify your configuration and click <code>Checkout</code>.</p>
+      <img src="/img/vps1.png" class="materialboxed responsive-img z-depth-1" /><br />
+      <p>Fill out your information (feel free to enter false info), set another password for your FlokiNET account, choose a payment method (we recommend Bitcoin for anonymity), agree to the terms of service, and click <code>Complete Order</code>.</p>
+      <img src="/img/vps2.png" class="materialboxed responsive-img z-depth-1" /><br />
+      <p>Finally, click <code>Continue To Client Area</code>.</p>
+      <img src="/img/vps3.png" class="materialboxed responsive-img z-depth-1" /><br />
 
-    access_log off;
-    error_log off;
-}
+      <p>After your server is activated (this will take some time), you will receive a ticket titled <code>Your new server is ready</code>. Click on it.</p>
+      <img src="/img/vps4.png" class="materialboxed responsive-img z-depth-1" /><br />
 
-server {
-    listen 443;
+      <p>Take note of your server's IP address, username, and password. You will need them later.</p>
+      <img src="/img/vps5.png" class="materialboxed responsive-img z-depth-1" />
 
-    ssl on;
-    ssl_certificate /etc/nginx/ssl/fullchain.pem;
-    ssl_certificate_key /etc/nginx/ssl/privkey.pem;
+      <h3 id="2"><li>Register a domain name</li></h3>
+      <p>A domain is the part of your web address like <b>tokumei.co</b> or <b>example.com</b>. You can purchase one from a domain registrar. We recommend FlokiNET.</p>
 
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_prefer_server_ciphers on;
+      <div class="center"><a href="https://www.billing.flokinet.com/aff.php?aff=55&pid=1" target="_blank"><img src="/img/flokinet.png" /></a></div>
 
-    add_header Strict-Transport-Security "max-age=31536000";
+      <p>Think of a domain and click <code>Search</code> to see if it is available. If it is, click <code>Add to Cart</code>.</p>
+      <img src="/img/domain0.png" class="materialboxed responsive-img z-depth-1" /><br />
+      <p>Now click <code>Go to checkout</code>.</p>
+      <img src="/img/domain1.png" class="materialboxed responsive-img z-depth-1" /><br />
+      <p>Click <code>Edit</code>.</p>
+      <img src="/img/domain2.png" class="materialboxed responsive-img z-depth-1" /><br />
+      <p>Enable <code>DNS Management</code>, <code>ID Protection</code>, and <code>Email Forwarding</code>. Click <code>Continue</code>.</p>
+      <img src="/img/domain3.png" class="materialboxed responsive-img z-depth-1" /><br />
+      <p>Verify your configuration and click <code>Checkout</code>.</p>
+      <img src="/img/domain4.png" class="materialboxed responsive-img z-depth-1" /><br />
+      <p>Your information should already be filled out. If not, make sure you are logged in. Choose a payment method (we still recommend Bitcoin), agree to the terms of service, and click <code>Complete Order</code>.</p>
+      <img src="/img/domain5.png" class="materialboxed responsive-img z-depth-1" /><br />
 
-    ssl_ciphers 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA';
-    ssl_dhparam /etc/nginx/ssl/dhparams.pem;
+      <p>Finally, click <code>Continue To Client Area</code>.</p>
+      <img src="/img/domain6.png" class="materialboxed responsive-img z-depth-1" /><br />
 
-    ssl_session_cache shared:SSL:10m;
-    ssl_session_timeout 10m;
+      <p>After your domain is activated (this will take some time), you will receive a ticket titled <code>New DNS account</code>. Click on it.</p>
+      <img src="/img/domain7.png" class="materialboxed responsive-img z-depth-1" /><br />
 
-    server_name tokumei.example.com www.tokumei.example.com; # CHANGEME
+      <p>Take note of your username and password, then click on the link next to <code>LogIn</code>.</p>
+      <img src="/img/domain8.png" class="materialboxed responsive-img z-depth-1" /><br />
 
-    access_log off;
-    error_log off;
+      <p>Use the username and password from the previous page to log in.</p>
+      <img src="/img/domain9.png" class="materialboxed responsive-img z-depth-1" /><br />
 
-    root /var/www/tokumei/sites/\$host/;
-    index index.html;
+      <p>Click on <code>Advanced Zone Editor</code>.</p>
+      <img src="/img/domain10.png" class="materialboxed responsive-img z-depth-1" /><br />
 
-    location / {
-        try_files \$uri @werc;
-    }
-    location /pub/ {
-        root /var/www/tokumei;
-        try_files \$uri =404;
-    }
-    location = /favicon.ico {
-        root /var/www/tokumei;
-        try_files /var/www/tokumei/sites/\$host/\$uri /pub/default_favicon.ico =404;
-    }
+      <p>Delete the default records.</p>
+      <img src="/img/domain11.png" class="materialboxed responsive-img z-depth-1" /><br />
 
-    error_page 404 = @werc;
+      <p>Enter your domain followed by a dot (.) under <code>Name</code>, 14400 under <code>TTL</code>, and your server's IP address (from the final page of <a href="#1" class="pink-text">step 1</a>) under <code>Address</code>. Click <code>Add Record</code>.</p>
+      <img src="/img/domain12.png" class="materialboxed responsive-img z-depth-1" /><br />
 
-    location @werc {
-        include fastcgi_params;
-        fastcgi_pass localhost:3333;
-    }
-}
-EOF</pre></code>
+      <p>Repeat the previous entry, but this time prepend www. to your domain.</p>
+      <img src="/img/domain13.png" class="materialboxed responsive-img z-depth-1" />
 
-      <h3 id="4"><li>Get and install an SSL certificate</li></h3>
-      <p>If you already have one, place your certificate and private key into <b>/etc/nginx/ssl/fullchain.pem</b> and <b>/etc/nginx/ssl/privkey.pem</b>. Otherwise, follow these steps to get a certificate from Let's Encrypt.</p>
-      <code><pre>cd /opt
-git clone https://github.com/letsencrypt/letsencrypt
-cd letsencrypt
-service nginx stop
-./letsencrypt-auto certonly --standalone -d tokumei.example.com -d www.tokumei.example.com
-mv /etc/letsencrypt/live/tokumei.example.com/fullchain.pem /etc/letsencrypt/live/tokumei.example.com/privkey.pem /etc/apache2/ssl/
-service nginx start</pre></code>
+      <h3 id="3"><li>Install Tokumei</li></h3>
+      <p>To log in to your server, you will need an SSH client. You can use <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html" class="pink-text">PuTTY</a> on Windows. Many other operating systems will come with SSH installed.</p>
+      <p>In PuTTY, enter your server's IP address under <code>Host Name (or IP address)</code> and click <code>Open</code>. Then log in with your server's username and password. You can find your server's IP address, username, and password on the final page of <a href="#1" class="pink-text">step 1</a>.</p>
+      <p>In other operating systems, open a terminal and enter:</p>
+      <code><pre>ssh username@IPaddress</pre></code>
+      <p>...filling in your server's username and IP address from the final page of <a href="#1" class="pink-text">step 1</a>. When prompted, enter your server's password. If asked if you are sure you want to continue connecting, type <code>yes</code>.</p>
+      <p>Once you are logged in, enter:</p>
+      <code><pre>su</pre></code>
+      <p>Enter your password again, then enter:</p>
+      <code><pre>sed -i 's/^deb cdrom/# deb cdrom/' /etc/apt/sources.list
+apt-get -y update
+apt-get -y install ca-certificates
+wget https://tokumei.co/pubclear.sh
+chmod +x pubclear.sh
+./pubclear.sh</pre></code>
+      <p>This will download and run the Tokumei installer. It will prompt you for a few options (described below), and then automatically install and configure Tokumei for you.</p>
 
-      <h3 id="5"><li>Install Tokumei</li></h3>
+      <h4>Domain</h4>
+      <p>Enter the domain you registered. Your Tokumei site will be available at https://<b>Domain</b>/ and https://www.<b>Domain</b>/.</p>
 
-      <code><pre>git clone https://git.kfarwell.org/tokumei /var/www/tokumei
-cd /var/www/tokumei/sites
-ln -s tokumei.co tokumei.example.com # CHANGEME
-ln -s tokumei.co www.tokumei.example.com # CHANGEME
-(crontab -l 2>/dev/null; echo '0 0 * * * /var/www/tokumei/bin/aux/trending.rc') | crontab -</pre></code>
+      <h4>Site title</h4>
+      <p>Give your Tokumei site a name. This will appear in various places in your site's interface.</p>
 
-      <h3 id="6"><li>Install and start cgd</li></h3>
-      <code><pre>mkdir /usr/local/go
-GOPATH=/usr/local/go go get github.com/uriel/cgd
-/usr/local/go/bin/cgd -f -c /var/www/tokumei/bin/werc.rc >/dev/null &</pre></code>
+      <h4>Site subtitle</h4>
+      <p>This appears after your site title in page titles (the text that appears on your site's tab in web browsers). It may be used elsewhere in the future.</p>
+      <img src="/img/sitetitles.png" class="materialboxed responsive-img z-depth-1" />
 
-      <p>You should now have a Tokumei site running at https://tokumei.example.com and https://www.tokumei.example.com!</p>
-      <p>If you run into any problems, shoot us an email at <a href="mailto:help@tokumei.co" class="pink-text">help@tokumei.co</a>.</p>
+      <h4>Site description</h4>
+      <p>This usually appears under the name of your site in search engine results.</p>
+      <img src="/img/sitedesc.png" class="materialboxed responsive-img z-depth-1" />
 
-      <h3 id="7"><li>Submit your site to our directory</li></h3>
-      <p>If you want to be listed in our <a href="/sites/" class="pink-text">directory of public Tokumei sites</a>, send a link to your site to <a href="mailto:submit@tokumei.co" class="pink-text">submit@tokumei.co</a>.</p>
+      <h4>Admin email address</h4>
+      <p>This will appear publicly in your site's footer.</p>
+      <img src="/img/email.png" class="materialboxed responsive-img z-depth-1" />
 
-      <h3 id="8"><li>Update Tokumei</li></h3>
-      <p>You should log in and run this periodically to update to the latest version of Tokumei and take advantage of security fixes and new features.</p>
-      <p>Email <a href="mailto:security@tokumei.co?subject=subscribe" class="pink-text">security@tokumei.co</a> to subscribe to our low-volume (zero vulnerabilities so far) security notice mailing list.</p>
-      <code><pre>cd /var/www/tokumei
-git pull</pre></code>
+      <h4>Bitcoin donation address</h4>
+      <p>If you have a Bitcoin address for donations, enter it here and it will appear on your site's donation page.</p>
 
-      <h3 id="9"><li>Renew your SSL certificate</li></h3>
-      <p>You will need to log in and run this every three months to renew your Let's Encrypt certificate.</p>
-      <code><pre>cd /opt/letsencrypt
-service nginx stop
-./letsencrypt-auto certonly --standalone -d tokumei.example.com -d www.tokumei.example.com
-mv /etc/letsencrypt/live/tokumei.example.com/fullchain.pem /etc/letsencrypt/live/tokumei.example.com/privkey.pem /etc/apache2/ssl/
-service nginx start</pre></code>
+      <h4>PayPal donation business ID</h4>
+      <p>If you have a <a href="https://www.paypal.com/" class="pink-text">PayPal</a> account for donations, you can <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_button-designer" class="pink-text">create a PayPal donation button</a> and add it to your site's donation page.</p>
+      <img src="/img/paypalbusiness0.png" class="materialboxed responsive-img z-depth-1" /><br />
+      <img src="/img/paypalbusiness1.png" class="materialboxed responsive-img z-depth-1" />
+
+      <h4>PayPal donation location</h4>
+      <img src="/img/paypallocation.png" class="materialboxed responsive-img z-depth-1" />
+
+      <h4>PayPal donation name</h4>
+      <img src="/img/paypalname.png" class="materialboxed responsive-img z-depth-1" />
+
+      <h4>PayPal donation currency</h4>
+      <img src="/img/paypalcurrency.png" class="materialboxed responsive-img z-depth-1" /><br />
+      <img src="/img/donate.png" class="materialboxed responsive-img z-depth-1" />
+
+      <h4>RSS feed description</h4>
+      <p>This appears in feed readers as the description of your site. It should be a brief phrase or sentence.</p>
+
+      <h4>RSS feed webmaster</h4>
+      <p>This appears in feed readers as a contact address. The standard format is <b>Email (Firstname Lastname)</b>. Feel free to omit your name or use a pseudonym.</p>
+
+      <h4>All done!</h4>
+      <p>After a few minutes, you should get a message that Tokumei has finished installing. You should now be able to access your site at https://<b>Domain</b>/.</p>
+
+      <h4>Next steps</h4>
+      <p>You can email a link to your site to <a href="mailto:submit@tokumei.co?subject=New%20Tokumei%20site" class="pink-text">submit@tokumei.co</a> and we'll list it on our <a href="/sites/" class="pink-text">public index</a>.</p>
+      <p>Email <a href="mailto:subscribe@tokumei.co" class="pink-text">subscribe@tokumei.co</a> to subscribe to our low-volume mailing list for Tokumei site hosts. We'll notify you of any updates that either concern security or require manual setup.</p>
+      <p>Check out our <a href="/wiki/" class="pink-text">wiki</a> for advanced site configuration not covered in the installer.</p>
+
+      <h4>Need help?</h4>
+      <p>Did something go wrong during the install? Want help installing Tokumei on a different platform? Send us an email at <a href="mailto:help@tokumei.co" class="pink-text">help@tokumei.co</a>.</p>
     </ol>
   </div>
 
