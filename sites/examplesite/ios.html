@@ -38,87 +38,22 @@
   </div>
 
   <div class="container section">
-    <ul class="collection">
-      <li class="collection-item">
-        <i class="mdi mdi-message-text-outline"></i>
-        <span>Free speech</span>
-        <i class="mdi mdi-star"></i>
-        <i class="mdi mdi-star"></i>
-        <i class="mdi mdi-star"></i>
-        <i class="mdi mdi-star"></i>
-        <i class="mdi mdi-star-outline"></i>
-      </li>
-      <li class="collection-item">
-        <i class="mdi mdi-tor"></i>
-        <span>Tor <i class="mdi mdi-help-circle tooltipped" data-position="top" data-tooltip="Tor protects your anonymity and free speech when you connect to supported Tokumei sites"></i></span>
-        <i class="mdi mdi-check"></i>
-        <a href="http://example.onion/" class="pink-text">http://example.onion/</a>
-      </li>
-      <li class="collection-item">
-        <i class="mdi mdi-map-marker"></i>
-        <span>Location</span>
-        <img class="flag" src="/img/flags/us.png" alt="United States of America" title="United States of America" />
-      </li>
-      <li class="collection-item">
-        <i class="mdi mdi-earth"></i>
-        <span>Language</span>
-        English
-      </li>
-      <li class="collection-item">
-        <i class="mdi mdi-account-network"></i>
-        <span>Community size</span>
-        <i class="mdi mdi-account"></i>
-        <i class="mdi mdi-account"></i>
-        <i class="mdi mdi-account"></i>
-        <i class="mdi mdi-account"></i>
-        <i class="mdi mdi-account-outline"></i>
-      </li>
-      <li class="collection-item">
-        <i class="mdi mdi-note-text"></i>
-        <span>Notes</span>
-        Not real
-      </li>
-    </ul>
+    <h2>How to access Example Site</h2>
+    <ol>
+      <h3><li>Install Onion Browser</li></h3>
+      <p>In order to protect anonymity and free speech, Example Site is only accessible using Tor. <a href="https://www.torproject.org/about/overview.html.en" class="pink-text">Learn more.</a></p>
+      <p>This guide will help you get Tor set up through the iOS port <a href="https://mike.tig.as/onionbrowser/" class="pink-text">Onion Browser</a>.</p>
+      <p>Open the App Store and search for <code>Onion Browser</code>. Install the app published by Mike Tigas.</p>
+      <img src="/img/appstore.png" class="materialboxed responsive-img z-depth-1" />
+
+      <h3><li>Navigate to Example Site</li></h3>
+      <p>Just open Onion Browser and enter <b>http://example.onion/</b> in its address bar.</p>
+      <img src="/img/navigate-ios.png" class="materialboxed responsive-img z-depth-1" />
+      <p>You can bookmark Example Site to come back without needing to remember the address.</p>
+      <img src="/img/bookmark-ios.png" class="materialboxed responsive-img z-depth-1" />
+    </ol>
   </div>
-
-  <div class="container section">
-    <div class="row">
-      <div class="col s12 m6 center">
-        <a href="android" class="pink-text">
-          <img class="responsive-img" src="/img/android.png">
-          <h4 class="center">Android</h4>
-        </a>
-      </div>
-      <div class="col s12 m6 center">
-        <a href="ios" class="pink-text">
-          <img class="responsive-img" src="/img/ios.png">
-          <h4 class="center">iOS</h4>
-        </a>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col s12 m4 center">
-        <a href="windows" class="pink-text">
-          <img class="responsive-img" src="/img/windows.png">
-          <h4 class="center">Windows</h4>
-        </a>
-      </div>
-      <div class="col s12 m4 center">
-        <a href="osx" class="pink-text">
-          <img class="responsive-img" src="/img/osx.png">
-          <h4 class="center">Mac OS X</h4>
-        </a>
-      </div>
-      <div class="col s12 m4 center">
-        <a href="unix" class="pink-text">
-          <img class="responsive-img" src="/img/unix.png">
-          <h4 class="center">Other Unix</h4>
-        </a>
-      </div>
-    </div>
-  </div>
-
+  
   <footer class="page-footer pink">
     <div class="container">
       <div class="row">
@@ -152,5 +87,19 @@
   <script src="/js/jquery-2.1.1.min.js"></script>
   <script src="/js/materialize.js"></script>
   <script src="/js/init.js"></script>
+  <script async type="text/javascript">
+    function updateLang() {
+      var tbb = 'https://www.torproject.org/dist/torbrowser/5.5.4/torbrowser-install-5.5.4_'+$('select').val()+'.exe'
+      console.log(tbb);
+      $('.btn-dl').replaceWith('<a href="'+tbb+'" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>');
+      $('.sig').replaceWith('<a class="sig pink-text" href="'+tbb+'.asc">Signature</a>');
+    }
+    $(function() {
+      $('select').ready(updateLang);
+      $('select').change(updateLang);
+      $('select').css('display', 'block');
+      $('.lang-alt').css('display', 'none');
+    });
+  </script>
 </body>
 </html>
