@@ -77,7 +77,7 @@ server {
     index index.html;
 
     location = / {
-        return 301 https://\$host/p/recent;
+        return 301 http://\$host/p/recent;
     }
     location / {
         try_files \$uri @werc;
