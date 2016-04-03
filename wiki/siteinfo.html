@@ -34,15 +34,25 @@
   </nav>
 
   <div class="container section">
-    <h1>Wiki</h1>
-    <p>A collection of advanced site configuration guides.</p>
-    <p>Not running a Tokumei site yet? <a href="/hosting/" class="pink-text">Get started here</a>.</p>
-    <div class="collection">
-      <a href="intro" class="collection-item black-text">Getting started with advanced configuration (read this first!)</a>
-      <a href="siteinfo" class="collection-item black-text">Editing your landing page, privacy policy, and rules</a>
-      <a href="rmdonate" class="collection-item black-text">Removing unused donation buttons</a>
-    </div>
-    <p>Have a suggestion for another guide? An improvement for an existing one? <a href="mailto:wiki@tokumei.co" class="pink-text">Email us</a>.</p>
+    <h1>Editing your landing page, privacy policy, and rules</h1>
+    <p>A basic understanding of HTML helps here.</p>
+    <ul>
+      <h3 id="1"><li>Landing page</li></h3>
+      <p>Edit <code>sites/tokumei.co/index.tpl</code>.</p>
+      <p>If you want to add or modify images here, use <code>sites/tokumei.co/img/</code>. This requires a basic understanding of the Unix command line.</p>
+
+      <h3 id="1"><li>Privacy policy</li></h3>
+      <p>Edit <code>sites/tokumei.co/privacy.tpl</code>.</p>
+      <p>If you want to add or modify images here, use <code>sites/tokumei.co/img/</code>. This requires a basic understanding of the Unix command line.</p>
+      <p>Tokumei collects some information from users out of the box, so take care not to remove anything from the default privacy policy without removing the corresponding functionality from Tokumei's code.</p>
+      <p>We encourage you not to add any additional user tracking, but if you do, please add it to your privacy policy. Less privacy-conscious sites will be listed lower on our <a href="/sites/" class="pink-text">public site directory</a>.</p>
+
+      <h3 id="1"><li>Rules</li></h3>
+      <p>Edit <code>sites/tokumei.co/rules.html</code>.</p>
+      <p>With Tokumei being a platform designed to further free speech, we encourage (but do not force) you to be as liberal as possible here. Sites with stricter rules will be listed lower (but are still welcome) on our <a href="/sites/" class="pink-text">public site directory</a>.</p>
+      <p>You will probably want to include a line similar to the following (replacing Canada with your country):</p>
+      <code><pre>&lt;p&gt;You will not upload, post, discuss, request, or link to anything that violates local or Canada law.&lt;/p&gt;</pre></code>
+    </ul>
   </div>
   
   <footer class="page-footer pink">
