@@ -88,3 +88,7 @@ code pre {
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.tabs .indicator {
+  background-color: #E91E63;
+}
