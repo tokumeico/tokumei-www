@@ -92,3 +92,13 @@ code pre {
 .tabs .indicator {
   background-color: #E91E63;
 }
+
+#news-banner {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #FFF;
+  padding: 1em;
+  text-align: center;
+}
