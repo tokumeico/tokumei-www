@@ -34,16 +34,21 @@
   </nav>
 
   <div class="container section">
-    <h1>Wiki</h1>
-    <p>A collection of advanced site configuration guides.</p>
-    <p>Not running a Tokumei site yet? <a href="/hosting/" class="pink-text">Get started here</a>.</p>
-    <div class="collection">
-      <a href="intro" class="collection-item black-text">Getting started with advanced configuration (read this first!)</a>
-      <a href="siteinfo" class="collection-item black-text">Editing your landing page, privacy policy, and rules</a>
-      <a href="rmdonate" class="collection-item black-text">Removing unused donation buttons</a>
-      <a href="addtheme" class="collection-item black-text">Adding themes</a>
-    </div>
-    <p>Have a suggestion for another guide? An improvement for an existing one? <a href="mailto:wiki@tokumei.co" class="pink-text">Email us</a>.</p>
+    <h1>Adding themes</h1>
+    <p>Knowledge of CSS is required here.</p>
+    <ol>
+      <h3 id="1"><li>Write your theme</li></h3>
+      <p>Edit <code>sites/tokumei.co/_werc/pub/your-theme.css</code>.</p>
+      <p>Looking at the other stylesheets in <code>sites/tokumei.co/_werc/pub/</code> may be helpful.</p>
+
+      <h3 id="2"><li>Update the theme list</li></h3>
+      <p>Edit <code>sites/tokumei.co/settings.tpl</code>.</p>
+      <p>Add a line anywhere between the following lines:</p>
+      <code><pre>&lt;select name="theme" required="" class="validate"&gt;</pre></code>
+      <code><pre>&lt;/select&gt;</pre></code>
+      <p>Your line should look like:</p>
+      <code><pre>&lt;option %(`{if(~ `{get_cookie theme} your-theme) echo 'selected=""'}%) value="your-theme"&gt;Your theme&lt;/option&gt;</pre></code>
+    </ol>
   </div>
   
   <footer class="page-footer pink">
