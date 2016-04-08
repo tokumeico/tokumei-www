@@ -166,18 +166,5 @@ Primary key fingerprint: 37D2 C987 89D8 3119 4839  4E3E 41E7 044E 1DBA 2E89
   <script src="/js/jquery-2.1.1.min.js"></script>
   <script src="/js/materialize.js"></script>
   <script src="/js/init.js"></script>
-  <script async type="text/javascript">
-    function updateLang() {
-      var tbb = 'https://www.torproject.org/dist/torbrowser/5.5.2/TorBrowser-5.5.2-osx64_'+$('select').val()+'.dmg'
-      $('.btn-dl').replaceWith('<a href="'+tbb+'" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>');
-      $('.sig').replaceWith('<a class="sig pink-text" href="'+tbb+'.asc">Signature</a>');
-    }
-    $(function() {
-      $('select').ready(updateLang);
-      $('select').change(updateLang);
-      $('select').css('display', 'block');
-      $('.lang-alt').css('display', 'none');
-    });
-  </script>
 </body>
 </html>
