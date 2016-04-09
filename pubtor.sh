@@ -1,5 +1,9 @@
 #!/bin/sh
 
+charlimit_def='Tokumei'
+read -p "Site title [$charlimit_def]: " charlimit
+charlimit=${charlimit:-$charlimit_def}
+
 siteTitle_def='Tokumei'
 read -p "Site title [$siteTitle_def]: " siteTitle
 siteTitle=${siteTitle:-$siteTitle_def}
@@ -46,7 +50,7 @@ webmaster=${webmaster:-$webmaster_def}
 
 echo 'Installing dependencies.'
 apt-get -y update
-apt-get -y install nginx 9base git golang tor
+apt-get -y install nginx 9base git golang tor imagemagick curl
 
 echo 'Configuring Tor.'
 echo 'HiddenServiceDir /var/lib/tor/hidden_service' >/etc/tor/torrc
@@ -99,6 +103,7 @@ cd /var/www/tokumei/sites
 ln -s tokumei.co $domain
 ln -s tokumei.co www.$domain
 
+charlimit=$(printf '%s\n' "$charlimit" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 siteTitle=$(printf '%s\n' "$siteTitle" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 siteSubTitle=$(printf '%s\n' "$siteSubTitle" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 meta_description=$(printf '%s\n' "$meta_description" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
@@ -111,7 +116,8 @@ paypal_currency=$(printf '%s\n' "$paypal_currency" | sed 's/[[\.*^$(){}?+|/]/\\&
 rssDesc=$(printf '%s\n' "$rssDesc" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 webmaster=$(printf '%s\n' "$webmaster" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 
-sed -i "s/^siteTitle=.*$/siteTitle="\'"$siteTitle"\'"/;
+sed -i "s/^charlimit=.*$/charlimit="\'"$charlimit"\'"/;
+        s/^siteTitle=.*$/siteTitle="\'"$siteTitle"\'"/;
         s/^siteSubTitle=.*$/siteSubTitle="\'"$siteSubTitle"\'"/;
         s/^meta_description=.*$/meta_description="\'"$meta_description"\'"/;
         s/^email=.*$/email="\'"$email"\'"/;

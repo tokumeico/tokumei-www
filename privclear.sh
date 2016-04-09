@@ -4,6 +4,10 @@ domain_def='tokumei.co'
 read -p "Domain [$domain_def]: " domain
 domain=${domain:-$domain_def}
 
+charlimit_def='300'
+read -p "Post character limit [$charlimit_def]: " charlimit
+charlimit=${charlimit:-$charlimit_def}
+
 siteTitle_def='Tokumei'
 read -p "Site title [$siteTitle_def]: " siteTitle
 siteTitle=${siteTitle:-$siteTitle_def}
@@ -58,7 +62,7 @@ user_password=${user_password:-$user_password_def}
 
 echo 'Installing dependencies.'
 apt-get -y update
-apt-get -y install nginx 9base git golang
+apt-get -y install nginx 9base git golang imagemagick curl
 
 echo 'Configuring nginx.'
 mkdir -p /etc/nginx/ssl
@@ -141,6 +145,7 @@ cd /var/www/tokumei/sites
 ln -s tokumei.co $domain
 ln -s tokumei.co www.$domain
 
+charlimit=$(printf '%s\n' "$charlimit" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 siteTitle=$(printf '%s\n' "$siteTitle" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 siteSubTitle=$(printf '%s\n' "$siteSubTitle" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 meta_description=$(printf '%s\n' "$meta_description" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
@@ -154,6 +159,7 @@ rssDesc=$(printf '%s\n' "$rssDesc" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 webmaster=$(printf '%s\n' "$webmaster" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 
 sed -i "s/^#sitePrivate/sitePrivate/;
+        s/^charlimit=.*$/charlimit="\'"$charlimit"\'"/;
         s/^siteTitle=.*$/siteTitle="\'"$siteTitle"\'"/;
         s/^siteSubTitle=.*$/siteSubTitle="\'"$siteSubTitle"\'"/;
         s/^meta_description=.*$/meta_description="\'"$meta_description"\'"/;
