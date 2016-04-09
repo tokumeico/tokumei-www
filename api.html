@@ -45,6 +45,7 @@
     <ul>
       <li><code>http://example.onion/p/1.txt:</code> Plain text contents of post #1. IDs start at 1.</li>
       <li><code>http://example.onion/p/1_werc/tags:</code> Post #1's tags. One per line.</li>
+      <li><code>http://example.onion/p/1_werc/image.(gif|jpeg|jpg|png|ff|tif|tiff|bmp):</code> Post #1's image attachment.</li>
       <li><code>http://example.onion/p/1_werc/spam:</code> Number of times post #1 has been flagged as spam.</li>
       <li><code>http://example.onion/p/1_werc/replies/0:</code> Plain text contents of reply #0 to post #1. IDs start at 0.</li>
       <li><code>http://example.onion/p/1_werc/postnum:</code> Post #1's most recent reply ID, or number of replies minus 1.</li>
@@ -60,6 +61,7 @@
       <li><h4>New post</h4>
           <code>comment:</code> the post text<br />
           <code>tags:</code> space-separated tags (optional)<br />
+          <code>file:</code> image attachment URL (optional)<br />
           <code>password:</code> deletion password (optional)</li>
       <li><h4>Reply</h4>
           <code>comment:</code> the reply text<br />
