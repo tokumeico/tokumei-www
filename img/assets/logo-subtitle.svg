@@ -13,7 +13,7 @@
    id="svg3386"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="tokumeiLogoTextSubtitle.svg"
+   sodipodi:docname="logo-subtitle.svg"
    inkscape:export-filename="/home/kuko/Pictures/tokumeiLogoText.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -154,13 +154,13 @@
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      x="454.57715"
-     y="222.80142"
+     y="225.06035"
      id="text6339"
      sodipodi:linespacing="125%"><tspan
        sodipodi:role="line"
        id="tspan6341"
        x="454.57715"
-       y="222.80142"
+       y="225.06035"
        style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:180px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Ultra-Light'">Tokumei</tspan></text>
   <g
      transform="matrix(0.25426564,-0.13547989,0.13547989,0.25426564,-1.1455766,244.46877)"
@@ -233,7 +233,7 @@
      xml:space="preserve"
      id="flowRoot3440"
      style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     transform="translate(-1.5727539,2.1188099)"><flowRegion
+     transform="translate(-36.962769,4.3777318)"><flowRegion
        id="flowRegion3442"><rect
          id="rect3444"
          width="802.19513"
@@ -241,4 +241,4 @@
          x="497.80316"
          y="229.68904" /></flowRegion><flowPara
        id="flowPara3446"
-       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:51.25px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Ultra-Light'">Anonymous microblogging</flowPara></flowRoot></svg>
+       style="font-style:normal;font-variant:normal;font-weight:200;font-stretch:normal;font-size:47.5px;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans Ultra-Light'">Anonymous social networking</flowPara></flowRoot></svg>
