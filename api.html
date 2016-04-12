@@ -40,7 +40,7 @@
 
     <hr><p>Replace <code>http://example.onion</code> with the location of the <a href="/sites/" class="pink-text">Tokumei site</a> you're using.</p>
 
-    <h3>Read</h3>
+    <h3 id="1">Read</h3>
     <p>Just GET these simple files:</p>
     <ul>
       <li><code>http://example.onion/p/1.txt:</code> Plain text contents of post #1. IDs start at 1.</li>
@@ -55,24 +55,24 @@
 
     <p>You can check the modify timestamp in a post or reply file's metadata to see when it was created.</p>
 
-    <h3>Write</h3>
+    <h3 id="2">Write</h3>
     <p>Just POST these fields to <code>http://example.onion/p/</code>:</p>
     <ul>
-      <li><h4>New post</h4>
+      <li><h4 id="2.1">New post</h4>
           <code>comment:</code> the post text<br />
           <code>tags:</code> space-separated tags (optional)<br />
           <code>file:</code> image attachment URL (optional)<br />
           <code>password:</code> deletion password (optional)</li>
-      <li><h4>Reply</h4>
+      <li><h4 id="2.2">Reply</h4>
           <code>comment:</code> the reply text<br />
           <code>parent:</code> the post to reply to</li>
     </ul>
 
-    <h2>Examples</h2>
+    <h2 id="3">Examples</h2>
 
     <p>Working with Tokumei's API in another language? Send some example code to <a href="mailto:hello@tokumei.co" class="pink-text">hello@tokumei.co</a> and we'll add it here.</p>
 
-    <h3><a href="http://rc.cat-v.org/" class="pink-text">rc shell</a></h3>
+    <h3 id="3.1"><a href="http://rc.cat-v.org/" class="pink-text">rc shell</a></h3>
 
     <h5>Get the text of every post tagged with #tokumei:</h5>
     <code><pre>for(i in `{curl http://example.onion/_werc/tags/tokumei})
@@ -93,7 +93,7 @@ stat -c %Y 1.txt</pre></code>
      -d 'parent=1' \
      http://example.onion/p/</pre></code>
 
-    <h3>Java / Qt Jambi</h3>
+    <h3 id="3.2">Java / Qt Jambi</h3>
 
     <p>There is a partial reference client in Java: <a href="https://kfarwell.org/projects/toqumei/" class="pink-text">Toqumei</a>.</p>
 
