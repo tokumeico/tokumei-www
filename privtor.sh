@@ -4,6 +4,10 @@ charlimit_def='300'
 read -p "Post character limit [$charlimit_def]: " charlimit
 charlimit=${charlimit:-$charlimit_def}
 
+filesizelimit_def='104857600'
+read -p "Attachment file size limit (bytes) [$filesizelimit_def]: " filesizelimit
+filesizelimit=${filesizelimit:-$filesizelimit_def}
+
 siteTitle_def='Tokumei'
 read -p "Site title [$siteTitle_def]: " siteTitle
 siteTitle=${siteTitle:-$siteTitle_def}
@@ -115,6 +119,7 @@ ln -s tokumei.co $domain
 ln -s tokumei.co www.$domain
 
 charlimit=$(printf '%s\n' "$charlimit" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
+filesizelimit=$(printf '%s\n' "$filesizelimit" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 siteTitle=$(printf '%s\n' "$siteTitle" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 siteSubTitle=$(printf '%s\n' "$siteSubTitle" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 meta_description=$(printf '%s\n' "$meta_description" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
@@ -129,6 +134,7 @@ webmaster=$(printf '%s\n' "$webmaster" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 
 sed -i "s/^#sitePrivate/sitePrivate/;
         s/^charlimit=.*$/charlimit="\'"$charlimit"\'"/;
+        s/^filesizelimit=.*$/filesizelimit="\'"$filesizelimit"\'"/;
         s/^siteTitle=.*$/siteTitle="\'"$siteTitle"\'"/;
         s/^siteSubTitle=.*$/siteSubTitle="\'"$siteSubTitle"\'"/;
         s/^meta_description=.*$/meta_description="\'"$meta_description"\'"/;
