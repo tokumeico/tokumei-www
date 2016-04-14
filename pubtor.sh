@@ -121,8 +121,8 @@ paypal_currency=$(printf '%s\n' "$paypal_currency" | sed 's/[[\.*^$(){}?+|/]/\\&
 rssDesc=$(printf '%s\n' "$rssDesc" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 webmaster=$(printf '%s\n' "$webmaster" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 
-sed -i "s/^charlimit=.*$/charlimit="\'"$charlimit"\'"/;
-        s/^filesizelimit=.*$/filesizelimit="\'"$filesizelimit"\'"/;
+sed -i "s/^charlimit=.*$/charlimit=$charlimit/;
+        s/^filesizelimit=.*$/filesizelimit=$filesizelimit/;
         s/^siteTitle=.*$/siteTitle="\'"$siteTitle"\'"/;
         s/^siteSubTitle=.*$/siteSubTitle="\'"$siteSubTitle"\'"/;
         s/^meta_description=.*$/meta_description="\'"$meta_description"\'"/;

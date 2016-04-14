@@ -133,8 +133,8 @@ rssDesc=$(printf '%s\n' "$rssDesc" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 webmaster=$(printf '%s\n' "$webmaster" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 
 sed -i "s/^#sitePrivate/sitePrivate/;
-        s/^charlimit=.*$/charlimit="\'"$charlimit"\'"/;
-        s/^filesizelimit=.*$/filesizelimit="\'"$filesizelimit"\'"/;
+        s/^charlimit=.*$/charlimit=$charlimit/;
+        s/^filesizelimit=.*$/filesizelimit=$filesizelimit/;
         s/^siteTitle=.*$/siteTitle="\'"$siteTitle"\'"/;
         s/^siteSubTitle=.*$/siteSubTitle="\'"$siteSubTitle"\'"/;
         s/^meta_description=.*$/meta_description="\'"$meta_description"\'"/;
