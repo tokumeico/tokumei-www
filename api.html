@@ -35,7 +35,7 @@
 
   <div class="container section">
     <h1>API</h1>
-    <img class="responsive-img" src="/img/xml_ascent.png" alt="XML sucks: The Ascent of Ward" />
+    <img class="responsive-img" src="/img/xmlascent.png" alt="XML sucks: The Ascent of Ward" />
     <p>Hate XML? You'll love Tokumei's API.</p>
 
     <hr><p>Replace <code>http://example.onion</code> with the location of the <a href="/sites/" class="pink-text">Tokumei site</a> you're using.</p>
@@ -45,7 +45,8 @@
     <ul>
       <li><code>http://example.onion/p/1.txt:</code> Plain text contents of post #1. IDs start at 1.</li>
       <li><code>http://example.onion/p/1_werc/tags:</code> Post #1's tags. One per line.</li>
-      <li><code>http://example.onion/p/1_werc/image.(gif|jpeg|jpg|png|ff|tif|tiff|bmp):</code> Post #1's image attachment.</li>
+      <li><code>http://example.onion/p/1_werc/filetype:</code> Post #1's file extension. Use it to determine the location of the file attachment below.</li>
+      <li><code>http://example.onion/p/1_werc/file.*:</code> Post #1's file attachment. For example, if <code>filetype</code> above returns <code>png</code>, fetch <code>file.png</code>.</li>
       <li><code>http://example.onion/p/1_werc/spam:</code> Number of times post #1 has been flagged as spam.</li>
       <li><code>http://example.onion/p/1_werc/replies/0:</code> Plain text contents of reply #0 to post #1. IDs start at 0.</li>
       <li><code>http://example.onion/p/1_werc/postnum:</code> Post #1's most recent reply ID, or number of replies minus 1.</li>
