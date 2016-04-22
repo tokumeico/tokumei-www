@@ -34,14 +34,14 @@
   </nav>
 
   <div class="container section">
-    <h1>Example Site</h1>
+    <h1>Tokumei CX</h1>
   </div>
 
   <div class="container section">
-    <h2>How to access Example Site</h2>
+    <h2>How to access Tokumei CX</h2>
     <ol>
-      <h3><li>Download Tor Browser</li></h3>
-      <p>In order to protect anonymity and free speech, Example Site is only accessible using Tor. <a href="https://www.torproject.org/about/overview.html.en" class="pink-text">Learn more.</a></p>
+      <h3 id="1"><li>Download Tor Browser</li></h3>
+      <p>In order to protect anonymity and free speech, Tokumei CX is only accessible using Tor. <a href="https://www.torproject.org/about/overview.html.en" class="pink-text">Learn more.</a></p>
       <p>Save Tor Browser <i>and its signature</i> to <b>$HOME/Downloads/</b>.</p>
       <div class="card">
         <form>
@@ -76,11 +76,11 @@
         </form>
       </div>
 
-      <h3><li>Verify your download</li></h3>
+      <h3 id="2"><li>Verify your download</li></h3>
       <p>You should use GnuPG to verify that your download wasn't tampered with.</p>
       <p>You can download GnuPG <a href="https://gpgtools.org" class="pink-text">here</a>.</p>
       <p>Open a terminal to run these commands.</p>
-      <code><pre>gpg --keyserver hkps://hkps.pool.sks-keyservers.net --recv-keys 0x4E2C6E8793298290
+      <code><pre>gpg --keyserver hkp://pool.sks-keyservers.net --recv-keys 0x4E2C6E8793298290
 gpg --fingerprint 0x4E2C6E8793298290</pre></code>
       <p>You should see the following:</p>
       <code><pre>pub   4096R/93298290 2014-12-15
@@ -99,15 +99,15 @@ Primary key fingerprint: EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290
      Subkey fingerprint: BA1E E421 BBB4 5263 180E  1FC7 2E1A C68E D408 14E0</pre></code>
       <p>Notice that there is a warning because you haven't assigned a trust index to this person. This means that GnuPG verified that the key made that signature, but it's up to you to decide if that key really belongs to the developer. The best method is to meet a Tor Browser developer in person and exchange key fingerprints.</p>
 
-      <h3><li>Run Tor Browser</li></h3>
+      <h3 id="3"><li>Run Tor Browser</li></h3>
       <p>You can now run Tor Browser by opening your <b>Downloads</b> folder and clicking on <b>TorBrowser-5.5.4-osx64_&lt;language&gt;.dmg</b>. (On recent versions of OS X, you might get a warning that it's from an "unidentified developer" — you can get around this complaint by control-clicking and selecting "open".) Drag the included file into your Applications folder and you will have a Tor Browser application in your chosen language that you can pin on your Dock.</p>
       <img src="/img/startosx0.png" class="materialboxed responsive-img z-depth-1" /><br />
       <img src="/img/startosx1.png" class="materialboxed responsive-img z-depth-1" />
 
-      <h3><li>Navigate to Example Site</li></h3>
-      <p>Just enter <b>http://example.onion/</b> in Tor Browser's address bar.</p>
+      <h3 id="4"><li>Navigate to Tokumei CX</li></h3>
+      <p>Just enter <b>http://pjsbhxst4sqb7ije.onion/</b> in Tor Browser's address bar.</p>
       <img src="/img/navigate.png" class="materialboxed responsive-img z-depth-1" /><br />
-      <p>You can bookmark Example Site or make it your homepage to come back without needing to remember the address.</p>
+      <p>You can bookmark Tokumei CX or make it your homepage to come back without needing to remember the address.</p>
       <img src="/img/bookmark.png" class="materialboxed responsive-img z-depth-1" /><br />
       <img src="/img/return.png" class="materialboxed responsive-img z-depth-1" /><br />
       <img src="/img/homepage.png" class="materialboxed responsive-img z-depth-1" />
@@ -123,16 +123,17 @@ Primary key fingerprint: EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290
         </div>
         <div class="col m2 offset-m2 s6">
           <ul>
-            <li><a class="white-text" href="mailto:hello@tokumei.co">Contact</a></li>
-            <li><a class="white-text" href="http://tokumeiobg3bqngg.onion/">Tor</a></li>
-            <li><a class="white-text" href="http://tokumei.i2p/">I2P</a></li>
+            <li><a class="white-text" href="/donate">Donate</a></li>
+            <li><a class="white-text" href="https://kfarwell.org/projects/tokumei/git/">Code</a></li>
+            <li><a class="white-text" href="/api">API</a></li>
+            <li><a class="white-text" href="/assets">Assets</a></li>
           </ul>
         </div>
         <div class="col m2 s6">
           <ul>
-            <li><a class="white-text" href="/donate">Donate</a></li>
-            <li><a class="white-text" href="https://kfarwell.org/projects/tokumei/git/">Code</a></li>
-            <li><a class="white-text" href="/api">API</a></li>
+            <li><a class="white-text" href="mailto:hello@tokumei.co">Contact</a></li>
+            <li><a class="white-text" href="http://tokumeiobg3bqngg.onion/">Tor</a></li>
+            <li><a class="white-text" href="http://tokumei.i2p/">I2P</a></li>
           </ul>
         </div>
       </div>
