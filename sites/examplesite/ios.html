@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+
+  <title>Tokumei &middot; Anonymous microblogging</title>
+  <meta name="description" content="What you have to say is more important than who you are — let your voice be heard.">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+
+  <link href="/css/materialdesignicons.min.css" text="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body>
+  <nav class="pink" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/" class="brand-logo white-text">
+        <img src="/img/logo.png" alt="Tokumei" />
+        <span>Tokumei</span>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li class="active"><a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a></li>
+        <li><a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a></li>
+        <li><a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a></li>
+      </ul>
+      <ul id="nav-mobile" class="side-nav">
+        <a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a>
+        <a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a>
+        <a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi mdi-menu"></i></a>
+    </div>
+  </nav>
+
+  <div class="container section">
+    <h1>Example Site</h1>
+  </div>
+
+  <div class="container section">
+    <h2>How to access Example Site</h2>
+    <ol>
+      <h3 id="1"><li>Install Onion Browser</li></h3>
+      <p>In order to protect anonymity and free speech, Example Site is only accessible using Tor. <a href="https://www.torproject.org/about/overview.html.en" class="pink-text">Learn more.</a></p>
+      <p>This guide will help you get Tor set up through the iOS port <a href="https://mike.tig.as/onionbrowser/" class="pink-text">Onion Browser</a>.</p>
+      <p>Open the App Store and search for <code>Onion Browser</code>. Install the app published by Mike Tigas.</p>
+      <img src="/img/appstore.png" class="materialboxed responsive-img z-depth-1" style="max-height: 90vh" />
+
+      <h3 id="2"><li>Navigate to Example Site</li></h3>
+      <p>Just open Onion Browser and enter <b>http://example.onion/</b> in its address bar.</p>
+      <img src="/img/navigate-ios.png" class="materialboxed responsive-img z-depth-1" style="max-height: 90vh" /><br />
+      <p>You can bookmark Example Site to come back without needing to remember the address.</p>
+      <img src="/img/bookmark-ios.png" class="materialboxed responsive-img z-depth-1" style="max-height: 90vh" />
+    </ol>
+  </div>
+  
+  <footer class="page-footer pink">
+    <div class="container">
+      <div class="row">
+        <div class="col m6 s12">
+          <h5 class="white-text">Disclaimer</h5>
+          <p class="grey-text text-lighten-4">Public Tokumei sites indexed here are run by third parties. Use at your own discretion. We do not run or recommend an official Tokumei site. We are not responsible for any content hosted by third-party sites.</p>
+        </div>
+        <div class="col m2 offset-m2 s6">
+          <ul>
+            <li><a class="white-text" href="/donate">Donate</a></li>
+            <li><a class="white-text" href="https://kfarwell.org/projects/tokumei/git/">Code</a></li>
+            <li><a class="white-text" href="/api">API</a></li>
+            <li><a class="white-text" href="/assets">Assets</a></li>
+          </ul>
+        </div>
+        <div class="col m2 s6">
+          <ul>
+            <li><a class="white-text" href="mailto:hello@tokumei.co">Contact</a></li>
+            <li><a class="white-text" href="http://tokumeiobg3bqngg.onion/">Tor</a></li>
+            <li><a class="white-text" href="http://tokumei.i2p/">I2P</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <a href="https://kfarwell.org/" class="pink-text text-lighten-3">Kyle Farwell</a> | <a href="https://krourke.org/" class="pink-text text-lighten-3">Keefer Rourke</a> | <a href="http://phil.guhnoo.org/" class="pink-text text-lighten-3">Phil St. Antoine</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/jquery-2.1.1.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/init.js"></script>
+  <script async type="text/javascript">
+    function updateLang() {
+      var tbb = 'https://www.torproject.org/dist/torbrowser/5.5.5/torbrowser-install-5.5.5_'+$('select').val()+'.exe'
+      console.log(tbb);
+      $('.btn-dl').replaceWith('<a href="'+tbb+'" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>');
+      $('.sig').replaceWith('<a class="sig pink-text" href="'+tbb+'.asc">Signature</a>');
+    }
+    $(function() {
+      $('select').ready(updateLang);
+      $('select').change(updateLang);
+      $('select').css('display', 'block');
+      $('.lang-alt').css('display', 'none');
+    });
+  </script>
+</body>
+</html>
