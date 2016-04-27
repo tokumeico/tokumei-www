@@ -198,10 +198,21 @@ chmod +x pubclear.sh
 
       <h4 id="3.16">Next steps</h4>
       <p>You can email a link to your site to <a href="mailto:submit@tokumei.co?subject=New%20Tokumei%20site" class="pink-text">submit@tokumei.co</a> and we'll list it on our <a href="/sites/" class="pink-text">public index</a>.</p>
-      <p>Email <a href="mailto:subscribe@tokumei.co" class="pink-text">subscribe@tokumei.co</a> to subscribe to our low-volume mailing list for Tokumei site hosts. We'll notify you of any updates that either concern security or require manual setup.</p>
+      <p>Email <a href="mailto:subscribe@tokumei.co" class="pink-text">subscribe@tokumei.co</a> to subscribe to our low-volume mailing list for Tokumei site hosts. We'll notify you of any security updates.</p>
       <p>Check out our <a href="/wiki/" class="pink-text">wiki</a> for advanced site configuration not covered in the installer.</p>
 
-      <h4 id="3.17">Need help?</h4>
+      <h4 id="3.17">Updating Tokumei</h4>
+      <p>You can update your Tokumei installation from time to time to get new features, fixes, and improvements.</p>
+      <p>Log in to your server, run <code>su</code>, enter your password, and run the following comm
+ands to update Tokumei:</p>
+      <code><pre>apt-get -y update
+apt-get -y upgrade
+cd /var/www/tokumei
+git pull</pre></code>
+      <p>This will fail if a local change either you or the Tokumei installer made conflicts with a change the update wants to make. In this case, you will need to <a href="https://easyengine.io/tutorials/git/git-resolve-merge-conflicts/" class="pink-text">resolve the merge conflict</a>. <a href="ma
+ilto:help@tokumei.co" class="pink-text">Email us</a> if you need help.</p>
+
+      <h4 id="3.18">Need help?</h4>
       <p>Did something go wrong during the install? Want help installing Tokumei on a different platform? Send us an email at <a href="mailto:help@tokumei.co" class="pink-text">help@tokumei.co</a>.</p>
     </ol>
   </div>

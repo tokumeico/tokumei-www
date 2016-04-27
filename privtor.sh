@@ -153,20 +153,7 @@ sed -i "s/^#dirdir_users_only/dirdir_users_only/;
 cd ..
 PATH=$PATH:/usr/lib/plan9/bin ./bin/aux/addwuser.rc "$user_name" "$user_password" posters repliers
 
-cd bin/aux
-cat <<EOF >update.rc
-#!/usr/bin/env rc
-
-apt-get update
-apt-get upgrade
-cd /var/www/tokumei
-git pull
-EOF
-
-chmod +x update.rc
-
 (crontab -l 2>/dev/null; echo '0 0 * *   * PATH=$PATH:/usr/lib/plan9/bin /var/www/tokumei/bin/aux/trending.rc') | crontab -
-(crontab -l 2>/dev/null; echo '0 0 * *   0 PATH=$PATH:/usr/lib/plan9/bin /var/www/tokumei/bin/aux/update.rc') | crontab -
 
 echo 'Installing and starting cgd.'
 mkdir -p /usr/local/go

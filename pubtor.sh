@@ -135,21 +135,7 @@ sed -i "s/^charlimit=.*$/charlimit=$charlimit/;
         s/^rssDesc=.*$/rssDesc="\'"$rssDesc"\'"/;
         s/^webmaster=.*$/webmaster="\'"$webmaster"\'"/" tokumei.co/_werc/config
 
-cd ../bin/aux
-
-cat <<EOF >update.rc
-#!/usr/bin/env rc
-
-apt-get update
-apt-get upgrade
-cd /var/www/tokumei
-git pull
-EOF
-
-chmod +x update.rc
-
 (crontab -l 2>/dev/null; echo '0 0 * *   * PATH=$PATH:/usr/lib/plan9/bin /var/www/tokumei/bin/aux/trending.rc') | crontab -
-(crontab -l 2>/dev/null; echo '0 0 * *   0 PATH=$PATH:/usr/lib/plan9/bin /var/www/tokumei/bin/aux/update.rc') | crontab -
 
 echo 'Installing and starting cgd.'
 mkdir -p /usr/local/go

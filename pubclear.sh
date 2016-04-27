@@ -168,15 +168,6 @@ sed -i "s/^charlimit=.*$/charlimit=$charlimit/;
 
 cd ../bin/aux
 
-cat <<EOF >update.rc
-#!/usr/bin/env rc
-
-apt-get update
-apt-get upgrade
-cd /var/www/tokumei
-git pull
-EOF
-
 cat <<EOF >renew.rc
 #!/usr/bin/env rc
 
@@ -187,10 +178,9 @@ chmod 600 /etc/letsencrypt/live/$domain/*
 service nginx start
 EOF
 
-chmod +x update.rc renew.rc
+chmod +x renew.rc
 
 (crontab -l 2>/dev/null; echo '0 0 * *   * PATH=$PATH:/usr/lib/plan9/bin /var/www/tokumei/bin/aux/trending.rc') | crontab -
-(crontab -l 2>/dev/null; echo '0 0 * *   0 PATH=$PATH:/usr/lib/plan9/bin /var/www/tokumei/bin/aux/update.rc') | crontab -
 (crontab -l 2>/dev/null; echo '0 0 1 */2 * PATH=$PATH:/usr/lib/plan9/bin /var/www/tokumei/bin/aux/renew.rc') | crontab -
 
 echo 'Installing and starting cgd.'
