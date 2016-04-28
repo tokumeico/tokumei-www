@@ -54,7 +54,7 @@
       <li><code>http://example.onion/_werc/tags/tokumei:</code> IDs of all posts tagged with #tokumei. One per line.</li>
     </ul>
 
-    <p>You can check the modify timestamp in a post or reply file's metadata to see when it was created.</p>
+    <p>You can check the modify timestamp in a post or reply file's metadata to see the day it was created. The exact time is stripped to improve anonymity.</p>
 
     <h3 id="2">Write</h3>
     <p>Just POST these fields to <code>http://example.onion/p/</code>:</p>
@@ -79,7 +79,7 @@
     <code><pre>for(i in `{curl http://example.onion/_werc/tags/tokumei})
     curl http://example.onion/p/$i.txt</pre></code>
 
-    <h5>Get the creation date of post #1 in seconds since Epoch:</h5>
+    <h5>Get the approximate creation date of post #1 in seconds since Epoch:</h5>
     <code><pre>wget http://example.onion/p/1.txt
 stat -c %Y 1.txt</pre></code>
 
