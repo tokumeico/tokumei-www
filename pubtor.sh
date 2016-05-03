@@ -54,7 +54,7 @@ webmaster=${webmaster:-$webmaster_def}
 
 echo 'Installing dependencies.'
 apt-get -y update
-apt-get -y install nginx 9base git golang tor imagemagick curl
+apt-get -y install nginx 9base git golang tor curl
 
 echo 'Configuring Tor.'
 echo 'HiddenServiceDir /var/lib/tor/hidden_service' >/etc/tor/torrc
