@@ -89,6 +89,10 @@ code pre {
   background-repeat: no-repeat;
 }
 
+.tabs {
+  overflow-x: hidden;
+}
+
 .tabs .indicator {
   background-color: #E91E63;
 }
