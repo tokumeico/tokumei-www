@@ -58,7 +58,7 @@ webmaster=${webmaster:-$webmaster_def}
 
 echo 'Installing dependencies.'
 apt-get -y update
-apt-get -y install nginx 9base git golang curl
+apt-get -y install nginx 9base git golang curl libimage-exiftool-perl
 
 echo 'Configuring nginx.'
 mkdir -p /etc/nginx/ssl
