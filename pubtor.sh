@@ -8,6 +8,10 @@ filesizelimit_def='104857600'
 read -p "Attachment file size limit (bytes) [$filesizelimit_def]: " filesizelimit
 filesizelimit=${filesizelimit:-$filesizelimit_def}
 
+offset_def='150'
+read -p "Recent posts [$offset_def]: " offset
+offset=${offset:-$offset_def}
+
 siteTitle_def='Tokumei'
 read -p "Site title [$siteTitle_def]: " siteTitle
 siteTitle=${siteTitle:-$siteTitle_def}
@@ -109,6 +113,7 @@ ln -s tokumei.co www.$domain
 
 charlimit=$(printf '%s\n' "$charlimit" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 filesizelimit=$(printf '%s\n' "$filesizelimit" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
+offset=$(printf '%s\n' "$offset" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 siteTitle=$(printf '%s\n' "$siteTitle" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 siteSubTitle=$(printf '%s\n' "$siteSubTitle" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 meta_description=$(printf '%s\n' "$meta_description" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
@@ -134,6 +139,8 @@ sed -i "s/^charlimit=.*$/charlimit=$charlimit/;
         s/^paypal_currency=.*$/paypal_currency="\'"$paypal_currency"\'"/;
         s/^rssDesc=.*$/rssDesc="\'"$rssDesc"\'"/;
         s/^webmaster=.*$/webmaster="\'"$webmaster"\'"/" tokumei.co/_werc/config
+
+sed -i "s/^offset=.*$/offset=$offset/" ../bin/aux/trending.rc
 
 (crontab -l 2>/dev/null; echo '0 0 * *   * PATH=$PATH:/usr/lib/plan9/bin /var/www/tokumei/bin/aux/trending.rc') | crontab -
 
