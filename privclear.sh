@@ -11,6 +11,14 @@ charlimit=${charlimit:-$charlimit_def}
 filesizelimit_def='104857600'
 read -p "Attachment file size limit (bytes) [$filesizelimit_def]: " filesizelimit
 filesizelimit=${filesizelimit:-$filesizelimit_def}
+filesizelimit_human=$(echo "$filesizelimit" | awk '{ split( "K M G" , v )
+    s=0
+    while($1>1024) {
+        $1/=1024
+        s++
+    }
+    print int($1) v[s]
+}'
 
 offset_def='150'
 read -p "Recent posts [$offset_def]: " offset
@@ -108,6 +116,8 @@ server {
 
     access_log off;
     error_log off;
+
+    client_max_body_size $filesizelimit_human;
 
     root /var/www/tokumei/sites/\$host/;
     index index.html;
