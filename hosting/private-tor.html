@@ -172,8 +172,9 @@ ands to update Tokumei:</p>
       <code><pre>apt-get -y update
 apt-get -y upgrade
 cd /var/www/tokumei
-git pull</pre></code>
-      <p>This will fail if a local change either you or the Tokumei installer made conflicts with a change the update wants to make. In this case, you will need to <a href="https://easyengine.io/tutorials/git/git-resolve-merge-conflicts/" class="pink-text">resolve the merge conflict</a>. <a href="ma
+git pull
+rm -r /tmp/fltr_cache</pre></code>
+      <p><code>git pull</code> will fail if a local change either you or the Tokumei installer made conflicts with a change the update wants to make. In this case, you will need to <a href="https://easyengine.io/tutorials/git/git-resolve-merge-conflicts/" class="pink-text">resolve the merge conflict</a>. <a href="ma
 ilto:help@tokumei.co" class="pink-text">Email us</a> if you need help.</p>
 
       <h4 id="2.20">Need help?</h4>
