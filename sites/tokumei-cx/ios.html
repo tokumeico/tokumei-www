@@ -90,7 +90,7 @@
   <script src="/js/init.js"></script>
   <script async type="text/javascript">
     function updateLang() {
-      var tbb = 'https://www.torproject.org/dist/torbrowser/5.5.5/torbrowser-install-5.5.5_'+$('select').val()+'.exe'
+      var tbb = 'https://www.torproject.org/dist/torbrowser/6.0/torbrowser-install-6.0_'+$('select').val()+'.exe'
       console.log(tbb);
       $('.btn-dl').replaceWith('<a href="'+tbb+'" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>');
       $('.sig').replaceWith('<a class="sig pink-text" href="'+tbb+'.asc">Signature</a>');
