@@ -22,7 +22,7 @@
       <ul class="right hide-on-med-and-down">
         <li><a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a></li>
         <li><a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a></li>
-        <li class="active"><a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a></li>
+        <li><a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a></li>
       </ul>
       <ul id="nav-mobile" class="side-nav">
         <a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a>
@@ -34,21 +34,34 @@
   </nav>
 
   <div class="container section">
-    <h1>Adding themes</h1>
-    <p>Knowledge of CSS is required here.</p>
-    <ol>
-      <h3 id="1"><li>Write your theme</li></h3>
-      <p>Edit <code>sites/tokumei.co/_werc/pub/your-theme.css</code>.</p>
-      <p>Looking at the other stylesheets in <code>pub/style/</code> and <code>sites/tokumei.co/_werc/pub/</code> may be helpful.</p>
+    <h1>Errata</h1>
+    <div id="1" class="card-panel">
+      <h4>1: Security fix: 18/06/16</h4>
+      <ol>
+        <li>Affected configurations</li>
+        <p>Public sites (and private sites with untrusted users) installed as
+        Tor hidden services running Tokumei versions between <a
+        href="https://kfarwell.org/projects/tokumei/git/commits/58aa83cd33e3152ec2172c13582cc12fc98eb2be/"
+        class="pink-text">58aa83c</a> (Apr 6) and <a
+        href="https://kfarwell.org/projects/tokumei/git/commits/556aa632a03b77a9bb46b3f2c25f29647d5fe700/"
+        class="pink-text">556aa63</a> (May 20).</p>
 
-      <h3 id="2"><li>Update the theme list</li></h3>
-      <p>Edit <code>sites/tokumei.co/settings.tpl</code>.</p>
-      <p>Add a line anywhere between the following lines:</p>
-      <code><pre>&lt;select name="theme" required="" class="validate"&gt;</pre></code>
-      <code><pre>&lt;/select&gt;</pre></code>
-      <p>Your line should look like:</p>
-      <code><pre>&lt;option %(`{if(~ `{get_cookie theme} your-theme) echo 'selected=""'}%) value="your-theme"&gt;Your theme&lt;/option&gt;</pre></code>
-    </ol>
+        <li>Vulnerability</li>
+	<p>These versions of Tokumei accept file uploads as URLs and retrieve
+        the files via wget or curl without torifying requests. An attacker can
+        run a server logging requests, post its address in the file field, and
+        find the real IP address of the Tokumei server in their log.</p>
+
+        <li>Fix</li>
+        <p>Upgrade to commit <a
+        href="https://kfarwell.org/projects/tokumei/git/commits/385f046278df680ee5aaf2eab2c111a43ab34249/"
+        class="pink-text">385f046</a> or later.</p>
+
+        <li>Credit</li>
+        <p>This issue was identified by <a href="https://kfarwell.org/"
+        class="pink-text">Kyle Farwell</a>.</p>
+      </ol>
+    </div>
   </div>
   
   <footer class="page-footer pink">
