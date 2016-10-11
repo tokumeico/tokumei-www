@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-charlimit_def='Tokumei'
-read -p "Site title [$charlimit_def]: " charlimit
-charlimit=${charlimit:-$charlimit_def}
+if [[ $EUID -ne 0 ]]; then
+    echo "Tokumei installation must be run as root!" 1>&2;
+    exit
+fi
 
 filesizelimit_def='104857600'
 read -p "Attachment file size limit (bytes) [$filesizelimit_def]: " filesizelimit
@@ -14,11 +15,7 @@ filesizelimit_human=$(echo "$filesizelimit" | awk '{ split( "K M G" , v )
         s++
     }
     print int($1) v[s]
-}'
-
-offset_def='150'
-read -p "Recent posts [$offset_def]: " offset
-offset=${offset:-$offset_def}
+}')
 
 siteTitle_def='Tokumei'
 read -p "Site title [$siteTitle_def]: " siteTitle
@@ -31,6 +28,14 @@ siteSubTitle=${siteSubTitle:-$siteSubTitle_def}
 meta_description_def='What you have to say is more important than who you are'
 read -p "Site description [$meta_description_def]: " meta_description
 meta_description=${meta_description:-$meta_description_def}
+
+offset_def='150'
+read -p "Recent posts [$offset_def]: " offset
+offset=${offset:-$offset_def}
+
+charlimit_def='300'
+read -p "Post character limit [$charlimit_def]: " charlimit
+charlimit=${charlimit:-$charlimit_def}
 
 email_def='user@example.com'
 read -p "Admin email address [$email_def]: " email
@@ -64,11 +69,11 @@ webmaster_def=$email' (John Smith)'
 read -p "RSS feed webmaster [$webmaster_def]: " webmaster
 webmaster=${webmaster:-$webmaster_def}
 
-echo 'Installing dependencies.'
+echo 'Installing dependencies...'
 apt-get -y update
 apt-get -y install nginx 9base git golang tor curl libimage-exiftool-perl
 
-echo 'Configuring Tor.'
+echo 'Configuring Tor...'
 echo 'HiddenServiceDir /var/lib/tor/hidden_service' >/etc/tor/torrc
 echo 'HiddenServicePort 80 127.0.0.1:80' >>/etc/tor/torrc
 service tor restart
@@ -77,8 +82,8 @@ while [ ! -f /var/lib/tor/hidden_service/hostname ]; do
 done
 domain=$(cat /var/lib/tor/hidden_service/hostname)
 
-echo 'Configuring nginx.'
-cat <<EOF >/etc/nginx/sites-available/default
+echo 'Configuring nginx...'
+cat <<EOF >/etc/nginx/sites-available/$domain
 server {
     server_name $domain www.$domain;
 
@@ -87,19 +92,19 @@ server {
 
     client_max_body_size filesizelimit_human;
 
-    root /var/www/tokumei/sites/\$host/;
+    root /var/www/$domain/sites/\$host/;
     index index.html;
 
     location / {
         try_files \$uri @werc;
     }
     location /pub/ {
-        root /var/www/tokumei;
+        root /var/www/$domain;
         try_files \$uri =404;
     }
     location = /favicon.ico {
-        root /var/www/tokumei;
-        try_files /var/www/tokumei/sites/\$host/\$uri /pub/default_favicon.ico =404;
+        root /var/www/$domain;
+        try_files /var/www/$domain/sites/\$host/\$uri /pub/default_favicon.ico =404;
     }
 
     error_page 404 = @werc;
@@ -111,13 +116,15 @@ server {
 }
 EOF
 
+ln -s /etc/nginx/sites-available/$domain /etc/nginx/sites-enabled/$domain
+
 service nginx restart
 
-echo 'Installing Tokumei.'
+echo 'Installing Tokumei...'
 mkdir -p /var/www
-git clone https://git.kfarwell.org/tokumei /var/www/tokumei
+git clone https://git.kfarwell.org/tokumei /var/www/$domain
 
-cd /var/www/tokumei/sites
+cd /var/www/$domain/sites
 ln -s tokumei.co $domain
 ln -s tokumei.co www.$domain
 
@@ -152,11 +159,11 @@ sed -i "s/^charlimit=.*$/charlimit=$charlimit/;
 
 sed -i "s/^offset=.*$/offset=$offset/" ../bin/aux/trending.rc
 
-(crontab -l 2>/dev/null; echo '0 0 * *   * PATH=$PATH:/usr/lib/plan9/bin /var/www/tokumei/bin/aux/trending.rc') | crontab -
+(crontab -l 2>/dev/null; echo '0 0 * *   * PATH=$PATH:/usr/lib/plan9/bin /var/www/'$domain'/bin/aux/trending.rc') | crontab -
 
-echo 'Installing and starting cgd.'
+echo 'Installing and starting cgd...'
 mkdir -p /usr/local/go
 GOPATH=/usr/local/go go get github.com/uriel/cgd
-/usr/local/go/bin/cgd -f -c /var/www/tokumei/bin/werc.rc >/dev/null 2>1 &
+/usr/local/go/bin/cgd -f -c /var/www/$domain/bin/werc.rc >/dev/null 2>1 &
 
 echo 'Done installing Tokumei. Your site should be available over Tor at http://'$domain'/.'
