@@ -90,7 +90,7 @@ server {
     access_log off;
     error_log off;
 
-    client_max_body_size filesizelimit_human;
+    client_max_body_size $filesizelimit_human;
 
     root /var/www/$domain/sites/\$host/;
     index index.html;
