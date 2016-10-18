@@ -172,7 +172,8 @@ sed -i "s/^#sitePrivate/sitePrivate/;
 sed -i "s/^#dirdir_users_only/dirdir_users_only/;
         s/^#groups_allowed_posts/groups_allowed_posts/" tokumei.co/p/_werc/config
 
-sed -i "s/^offset=.*$/offset=$offset/" ../bin/aux/trending.rc
+sed -i "s/^offset=.*$/offset=$offset/;
+		s/\/www\/tokumei/\/www\/$domain/" ../bin/aux/trending.rc
 
 cd ..
 PATH=$PATH:/usr/lib/plan9/bin ./bin/aux/addwuser.rc "$user_name" "$user_password" posters repliers
