@@ -158,7 +158,7 @@ sed -i "s/^charlimit=.*$/charlimit=$charlimit/;
         s/^webmaster=.*$/webmaster="\'"$webmaster"\'"/" tokumei.co/_werc/config
 
 sed -i "s/^offset=.*$/offset=$offset/;
-		s/\/www\/tokumei/\/www\/$domain/" ../bin/aux/trending.rc
+        s/\/www\/tokumei/\/www\/$domain/" ../bin/aux/trending.rc
 
 (crontab -l 2>/dev/null; echo '0 0 * *   * PATH=$PATH:/usr/lib/plan9/bin /var/www/'$domain'/bin/aux/trending.rc') | crontab -
 
