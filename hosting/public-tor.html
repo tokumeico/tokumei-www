@@ -93,7 +93,7 @@
       <code><pre>ssh username@IPaddress</pre></code>
       <p>...filling in your server's username and IP address from the final page of <a href="#1" class="pink-text">step 1</a>. When prompted, enter your server's password. If asked if you are sure you want to continue connecting, type <code>yes</code>.</p>
       <p>Once you are logged in, enter:</p>
-      <code><pre>su</pre></code>
+      <code><pre>sudo -i</pre></code>
       <p>Enter your password again, then enter:</p>
       <code><pre>sed -i 's/^deb cdrom/# deb cdrom/' /etc/apt/sources.list
 apt-get -y update
@@ -103,25 +103,25 @@ chmod +x pubtor.sh
 ./pubtor.sh</pre></code>
       <p>This will download and run the Tokumei installer. It will prompt you for a few options (described below), and then automatically install and configure Tokumei for you.</p>
 
-      <h4 id="2.1">Post character limit</h4>
-      <p>The maximum length of users' posts on your site.</p>
-
-      <h4 id="2.2">Attachment file size limit</h4>
+      <h4 id="2.1">Attachment file size limit</h4>
       <p>The maximum size of users' posts' attachments on your site, in bytes.</p>
 
-      <h4 id="2.3">Recent posts</h4>
-      <p>The number of posts that will be considered recent. This is used to determine trending tags and posts. Adjust based on how active your site is.</p>
-
-      <h4 id="2.4">Site title</h4>
+      <h4 id="2.2">Site title</h4>
       <p>Give your Tokumei site a name. This will appear in various places in your site's interface.</p>
 
-      <h4 id="2.5">Site subtitle</h4>
+      <h4 id="2.3">Site subtitle</h4>
       <p>This appears after your site title in page titles (the text that appears on your site's tab in web browsers). It may be used elsewhere in the future.</p>
       <img src="/img/sitetitles.png" class="materialboxed responsive-img z-depth-1" />
 
-      <h4 id="2.6">Site description</h4>
+      <h4 id="2.4">Site description</h4>
       <p>This usually appears under the name of your site in search engine results.</p>
       <img src="/img/sitedesc.png" class="materialboxed responsive-img z-depth-1" />
+
+      <h4 id="2.5">Recent posts</h4>
+      <p>The number of posts that will be considered recent. This is used to determine trending tags and posts. Adjust based on how active your site is.</p>
+
+      <h4 id="2.6">Post character limit</h4>
+      <p>The maximum length of users' posts on your site.</p>
 
       <h4 id="2.7">Admin email address</h4>
       <p>This will appear publicly in your site's footer.</p>
@@ -161,13 +161,14 @@ chmod +x pubtor.sh
 
       <h4 id="2.17">Updating Tokumei</h4>
       <p>You can update your Tokumei installation from time to time to get new features, fixes, and improvements.</p>
-      <p>Log in to your server, run <code>su</code>, enter your password, and run the following commands to update Tokumei:</p>
+      <p>Log in to your server, run <code>sudo -i</code>, enter your password, and run the following commands to update Tokumei:</p>
       <code><pre>apt-get -y update
 apt-get -y upgrade
-cd /var/www/tokumei
+cd /var/www/<b>OnionDomain</b>
 git pull
 rm -r /tmp/fltr_cache</pre></code>
-      <p><code>git pull</code> will fail if a local change either you or the Tokumei installer made conflicts with a change the update wants to make. In this case, you will need to <a href="https://easyengine.io/tutorials/git/git-resolve-merge-conflicts/" class="pink-text">resolve the merge conflict</a>. <a href="mailto:help@tokumei.co" class="pink-text">Email us</a> if you need help.</p>
+      <p>Where <code>/var/www/<b>OnionDomain</b></code> is the path to your Tokumei installation. You should replace <b>OnionDomain</b> with the *.onion URL that was generated at installation.</p>
+      <p><code>git pull</code> will fail if a local change, that either you or the Tokumei installer made, conflicts with a change the update wants to make. In this case, you will need to <a href="https://easyengine.io/tutorials/git/git-resolve-merge-conflicts/" class="pink-text">resolve the merge conflict</a>. <a href="mailto:help@tokumei.co" class="pink-text">Email us</a> if you need help.</p>
 
       <h4 id="2.18">Need help?</h4>
       <p>Did something go wrong during the install? Want help installing Tokumei on a different platform? Send us an email at <a href="mailto:help@tokumei.co" class="pink-text">help@tokumei.co</a>.</p>

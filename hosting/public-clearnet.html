@@ -135,7 +135,7 @@
       <code><pre>ssh username@IPaddress</pre></code>
       <p>...filling in your server's username and IP address from the final page of <a href="#1" class="pink-text">step 1</a>. When prompted, enter your server's password. If asked if you are sure you want to continue connecting, type <code>yes</code>.</p>
       <p>Once you are logged in, enter:</p>
-      <code><pre>su</pre></code>
+      <code><pre>sudo -i</pre></code>
       <p>Enter your password again, then enter:</p>
       <code><pre>sed -i 's/^deb cdrom/# deb cdrom/' /etc/apt/sources.list
 apt-get -y update
@@ -145,28 +145,28 @@ chmod +x pubclear.sh
 ./pubclear.sh</pre></code>
       <p>This will download and run the Tokumei installer. It will prompt you for a few options (described below), and then automatically install and configure Tokumei for you.</p>
 
-      <h4 id="3.1">Domain</h4>
-      <p>Enter the domain you registered. Your Tokumei site will be available at https://<b>Domain</b>/ and https://www.<b>Domain</b>/.</p>
-
-      <h4 id="3.2">Post character limit</h4>
-      <p>The maximum length of users' posts on your site.</p>
-
-      <h4 id="3.3">Attachment file size limit</h4>
+      <h4 id="3.1">Attachment file size limit</h4>
       <p>The maximum size of users' posts' attachments on your site, in bytes.</p>
 
-      <h4 id="3.4">Recent posts</h4>
-      <p>The number of posts that will be considered recent. This is used to determine trending tags and posts. Adjust based on how active your site is.</p>
+      <h4 id="3.2">Domain</h4>
+      <p>Enter the domain you registered. Your Tokumei site will be available at https://<b>Domain</b>/ and https://www.<b>Domain</b>/.</p>
 
-      <h4 id="3.5">Site title</h4>
+      <h4 id="3.3">Site title</h4>
       <p>Give your Tokumei site a name. This will appear in various places in your site's interface.</p>
 
-      <h4 id="3.6">Site subtitle</h4>
+      <h4 id="3.4">Site subtitle</h4>
       <p>This appears after your site title in page titles (the text that appears on your site's tab in web browsers). It may be used elsewhere in the future.</p>
       <img src="/img/sitetitles.png" class="materialboxed responsive-img z-depth-1" />
 
-      <h4 id="3.7">Site description</h4>
+      <h4 id="3.5">Site description</h4>
       <p>This usually appears under the name of your site in search engine results.</p>
       <img src="/img/sitedesc.png" class="materialboxed responsive-img z-depth-1" />
+
+      <h4 id="3.6">Recent posts</h4>
+      <p>The number of posts that will be considered recent. This is used to determine trending tags and posts. Adjust based on how active your site is.</p>
+
+      <h4 id="3.7">Post character limit</h4>
+      <p>The maximum length of users' posts on your site.</p>
 
       <h4 id="3.8">Admin email address</h4>
       <p>This will appear publicly in your site's footer.</p>
@@ -206,14 +206,15 @@ chmod +x pubclear.sh
 
       <h4 id="3.18">Updating Tokumei</h4>
       <p>You can update your Tokumei installation from time to time to get new features, fixes, and improvements.</p>
-      <p>Log in to your server, run <code>su</code>, enter your password, and run the following comm
+      <p>Log in to your server, run <code>sudo -i</code>, enter your password, and run the following comm
 ands to update Tokumei:</p>
       <code><pre>apt-get -y update
 apt-get -y upgrade
-cd /var/www/tokumei
+cd /var/www/<b>Domain</b>
 git pull
 rm -r /tmp/fltr_cache</pre></code>
-      <p><code>git pull</code> will fail if a local change either you or the Tokumei installer made conflicts with a change the update wants to make. In this case, you will need to <a href="https://easyengine.io/tutorials/git/git-resolve-merge-conflicts/" class="pink-text">resolve the merge conflict</a>. <a href="ma
+      <p>Where <code>/var/www/<b>Domain</b></code> is the path to your Tokumei installation. You should replace <b>Domain</b> with the domain name that was registered in <a href="#2" class="pink-text">step 2</a>.
+      <p><code>git pull</code> will fail if a local change, that either you or the Tokumei installer made, conflicts with a change the update wants to make. In this case, you will need to <a href="https://easyengine.io/tutorials/git/git-resolve-merge-conflicts/" class="pink-text">resolve the merge conflict</a>. <a href="ma
 ilto:help@tokumei.co" class="pink-text">Email us</a> if you need help.</p>
 
       <h4 id="3.19">Need help?</h4>

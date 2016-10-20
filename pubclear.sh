@@ -5,10 +5,6 @@ if [[ $EUID -ne 0 ]]; then
     exit
 fi
 
-siteTitle_def='Tokumei'
-read -p "Site title [$siteTitle_def]: " siteTitle
-siteTitle=${siteTitle:-$siteTitle_def}
-
 filesizelimit_def='104857600'
 read -p "Attachment file size limit (bytes) [$filesizelimit_def]: " filesizelimit
 filesizelimit=${filesizelimit:-$filesizelimit_def}
@@ -24,6 +20,10 @@ filesizelimit_human=$(echo "$filesizelimit" | awk '{ split( "K M G" , v )
 domain_def='tokumei.co'
 read -p "Domain [$domain_def]: " domain
 domain=${domain:-$domain_def}
+
+siteTitle_def='Tokumei'
+read -p "Site title [$siteTitle_def]: " siteTitle
+siteTitle=${siteTitle:-$siteTitle_def}
 
 siteSubTitle_def='Anonymous microblogging'
 read -p "Site subtitle [$siteSubTitle_def]: " siteSubTitle
