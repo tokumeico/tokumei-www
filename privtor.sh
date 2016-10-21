@@ -104,7 +104,7 @@ server {
     index index.html;
 
     location = / {
-        return 301 http://\$host/p/recent;
+        return 301 http://\$host/p/timeline;
     }
     location / {
         try_files \$uri @werc;
