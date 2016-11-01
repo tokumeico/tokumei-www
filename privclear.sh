@@ -33,9 +33,9 @@ meta_description_def='What you have to say is more important than who you are'
 read -p "Site description [$meta_description_def]: " meta_description
 meta_description=${meta_description:-$meta_description_def}
 
-offset_def='150'
-read -p "Recent posts [$offset_def]: " offset
-offset=${offset:-$offset_def}
+trendinginterval_def='24'
+read -p "Trending interval (hours) [$trendinginterval_def]: " trendinginterval
+trendinginterval=$(echo "$trendinginterval" | awk '{print ($1 * 3600)}')
 
 charlimit_def='300'
 read -p "Post character limit [$charlimit_def]: " charlimit
@@ -176,7 +176,7 @@ ln -s tokumei.co www.$domain
 
 charlimit=$(printf '%s\n' "$charlimit" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 filesizelimit=$(printf '%s\n' "$filesizelimit" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
-offset=$(printf '%s\n' "$offset" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
+trendinginterval=$(printf '%s\n' "$trendinginterval" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 siteTitle=$(printf '%s\n' "$siteTitle" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 siteSubTitle=$(printf '%s\n' "$siteSubTitle" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 meta_description=$(printf '%s\n' "$meta_description" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
@@ -192,6 +192,7 @@ webmaster=$(printf '%s\n' "$webmaster" | sed 's/[[\.*^$(){}?+|/]/\\&/g')
 sed -i "s/^#sitePrivate/sitePrivate/;
         s/^charlimit=.*$/charlimit=$charlimit/;
         s/^filesizelimit=.*$/filesizelimit=$filesizelimit/;
+        s/^trendinginterval=.*$/trendinginterval=$trendinginterval/;
         s/^siteTitle=.*$/siteTitle="\'"$siteTitle"\'"/;
         s/^siteSubTitle=.*$/siteSubTitle="\'"$siteSubTitle"\'"/;
         s/^meta_description=.*$/meta_description="\'"$meta_description"\'"/;
@@ -204,11 +205,10 @@ sed -i "s/^#sitePrivate/sitePrivate/;
         s/^rssDesc=.*$/rssDesc="\'"$rssDesc"\'"/;
         s/^webmaster=.*$/webmaster="\'"$webmaster"\'"/" tokumei.co/_werc/config
 
-sed -i "s/^#dirdir_users_only/dirdir_users_only/;
+sed -i "s/^#posts_users_only/posts_users_only/;
         s/^#groups_allowed_posts/groups_allowed_posts/" tokumei.co/p/_werc/config
 
-sed -i "s/^offset=.*$/offset=$offset/;
-        s/\/www\/tokumei/\/var\/www\/$domain/" ../bin/aux/trending.rc
+sed -i "s/\/www\/tokumei/\/var\/www\/$domain/" ../bin/aux/trending.rc
 
 cd ..
 PATH=$PATH:/usr/lib/plan9/bin ./bin/aux/addwuser.rc "$user_name" "$user_password" posters repliers
