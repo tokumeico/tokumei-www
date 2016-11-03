@@ -81,8 +81,10 @@ echo 'Installing dependencies...'
 apt-get -y update
 apt-get -y install nginx 9base git golang tor curl libimage-exiftool-perl
 
-echo 'Configuring Tor...'
+echo 'Backing up torrc to /etc/tor/torrc.bak...'
 mv /etc/tor/torrc /etc/tor/torrc.bak
+
+echo 'Configuring Tor...'
 echo 'HiddenServiceDir /var/lib/tor/hidden_service' >/etc/tor/torrc
 echo 'HiddenServicePort 80 127.0.0.1:80' >>/etc/tor/torrc
 service tor restart
