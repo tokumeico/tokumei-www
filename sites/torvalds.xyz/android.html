@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+  <title>Tokumei &middot; Anonymous microblogging</title>
+  <meta name="description" content="What you have to say is more important than who you are — let your voice be heard.">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon">
+  <link href="/css/materialdesignicons.min.css" text="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link href="/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+</head>
+<body>
+  <nav class="pink" role="navigation">
+    <div class="nav-wrapper container">
+      <a id="logo-container" href="/" class="brand-logo white-text">
+        <img src="/img/logo.png" alt="Tokumei" />
+        <span>Tokumei</span>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li class="active"><a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a></li>
+        <li><a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a></li>
+        <li><a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a></li>
+      </ul>
+      <ul id="nav-mobile" class="side-nav">
+        <a href="/sites/"><i class="mdi mdi-earth left"></i>Public Sites</a>
+        <a href="/hosting/"><i class="mdi mdi-settings left"></i>Self-Hosting</a>
+        <a href="/wiki/"><i class="mdi mdi-book-open-variant left"></i>Wiki</a>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi mdi-menu"></i></a>
+    </div>
+  </nav>
+
+  <div class="container section">
+    <h1>torvalds.xyz</h1>
+  </div>
+
+  <div class="container section">
+    <h2>How to access torvalds.xyz</h2>
+    <p>In order to protect anonymity and free speech, torvalds.xyz is only accessible using Tor. <a href="https://www.torproject.org/about/overview.html.en" class="pink-text">Learn more.</a></p>
+    <p>This guide will help you get Tor set up through the Android port <a href="https://guardianproject.info/apps/orbot/" class="pink-text">Orbot.</a></p>
+    <div class="row">
+      <div class="col s12">
+        <ul class="tabs">
+          <li class="tab col s6"><a href="#fdroid" class="pink-text"><b>F-Droid</b></a></li>
+          <li class="tab col s6"><a href="#play" class="pink-text"><b>Play Store</b></a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="fdroid">
+      <ol>
+        <h3 id="1"><li>Download F-Droid</li></h3>
+        <p>On a desktop computer, download the F-Droid APK file <i>and its signature</i> to <b>$HOME/Downloads/</b>.</p>
+        <p><i>Note that it is suggested to use a UNIX-like operating system as Windows does not have adequate tools to verify your download.</i></p>
+        <div class="card">
+          <form>
+            <div class="card-content">
+              <a href="https://f-droid.org/repo/org.fdroid.fdroid_102001.apk" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>
+            </div>
+            <div class="card-action">
+              <a class="sig pink-text" href="https://f-droid.org/repo/org.fdroid.fdroid_102001.apk.asc">Signature</a>
+            </div>
+          </form>
+        </div>
+
+        <h3 id="2"><li>Verify your download</li></h3>
+        <p>You should use GnuPG to verify that your download wasn't tampered with.</p>
+        <p>You can download GnuPG <a href="https://gpgtools.org" class="pink-text">here</a>.</p>
+        <p>Open a terminal to run these commands.</p>
+        <code><pre>gpg --keyserver pgp.mit.edu --recv-keys 0x41e7044e1dba2e89
+gpg --fingerprint 0x41e7044e1dba2e89</pre></code>
+        <p>You should see the following:</p>
+        <code><pre>pub   4096R/1DBA2E89 2014-04-25
+      Key fingerprint = 37D2 C987 89D8 3119 4839  4E3E 41E7 044E 1DBA 2E89
+uid                  F-Droid &lt;admin@f-droid.org&gt;
+sub   3072R/DD5DCE7A 2014-04-25 [expires: 2019-04-24]
+sub   3072R/F9BF9046 2014-04-25 [expires: 2019-04-24]</pre></code>
+        <code><pre>cd $HOME/Downloads
+gpg --verify org.fdroid.fdroid_102001.apk.asc org.fdroid.fdroid_102001.apk</pre></code>
+        <p>The output should say <code>Good signature</code>:</p>
+        <code><pre>gpg: Good signature from "F-Droid &lt;admin@f-droid.org&gt;"
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 37D2 C987 89D8 3119 4839  4E3E 41E7 044E 1DBA 2E89
+     Subkey fingerprint: 802A 9799 0161 1234 6E1F  EFF4 7A02 9E54 DD5D CE7A
+</pre></code>
+        <p>Notice that there is a warning because you haven't assigned a trust index to the F-Droid developers. This means that GnuPG verified that the key made that signature, but it's up to you to decide if that key really belongs to the developer. The best method is to meet a F-Droid developer in person and exchange key fingerprints.</p>
+
+        <h3 id="3"><li>Install F-Droid</li></h3>
+        <p>You should now copy the <i>verified</i> F-Droid APK file to the internal storage of your Android device.<p>
+        <p>Navigate to Android Settings &gt; Security and check Unknown Sources. This will allow the installation of apps from outside of the Google Play Store or Android Market.</p>
+        <img src="/img/androidsettings.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <p>Open your Android device's file browser and tap on the F-Droid APK file. This should prompt you to install the application.</p>
+        <img src="/img/installfdroid.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <p>Once installed, open F-Droid and click the three-dot menu &ndash; select Repositories. Next enable the <b>Guardian Project Official Releases</b> repository.</p>
+        <img src="/img/fdroidrepos.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <h3 id="4"><li>Install Orbot</li></h3>
+        <p>Hit the search button in F-Droid and type <code>orbot</code>. Click the entry entitled <code>Orbot</code> with the purple onion icon. Click INSTALL.</p>
+        <img src="/img/installorbot-fdroid.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <p>Open Orbot and long press on the large grey onion. It should turn green, and after a few moments you should be connected to the Tor network &ndash; network activity can be checked via a persistent notification.</p>
+        <img src="/img/torconnect.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <p><i>Note: if you have a rooted Android device, you can optionally route all web traffic through Tor by enabling an option in Orbot Settings and granting superuser access.</i></p>
+        <h3 id="5"><li>Install Orfox</li></h3>
+        <p>Open F-Droid again and search for <code>orfox</code>. Click the entry with an icon that looks like a green and purple Firefox logo. Click INSTALL.</p>
+        <img src="/img/installorfox-fdroid.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <p>Open Orfox and verify that you're connected to Tor. Navigate to <a href="https://check.torproject.org" class="pink-text">https://check.torproject.org</a>. You should see a congratulatory message and a notice displaying what your IP address appears to be.</p>
+        <img src="/img/checkorfox.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <p><i>You are now anonymized and ready to browse torvalds.xyz!</i></p>
+        <h3 id="6"><li>Navigate to torvalds.xyz</li></h3>
+        <p>Open Orfox and just enter <b>http://jm42gnsz55tcyohe.onion/</b> in the address bar. You can bookmark the page so you don't have to remember the URL by pressing the three dot menu and then the star.</p>
+        <img src="/img/navigate-android.png" class="materialboxed responsive-img z-depth-1" /><br />
+      </ol>
+    </div>
+    <div id="play">
+      <ol>
+        <h3><li>Install Orbot</li></h3>
+        <p>Hit the search button in the Google Play Store and type <code>orbot</code>. Click the entry entitled <code>Orbot</code> with the purple onion icon. Click INSTALL.
+        <img src="/img/installorbot-play.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <p>Open Orbot and long press on the large grey onion. It should turn green, and after a few moments you should be connected to the Tor network &ndash; network activity can be checked via a persistent notification.</p>
+        <img src="/img/torconnect.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <p><i>Note: if you have a rooted Android device, you can optionally route all web traffic through Tor by enabling an option in Orbot Settings and granting superuser access.</i></p>
+        <h3><li>Install Orfox</li></h3>
+        <p>Open the Google Play Store again and search for <code>orfox</code>. Click the entry with an icon that looks like a green and purple Firefox logo. Click INSTALL.</p>
+        <img src="/img/installorfox-play.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <p>Open Orfox and verify that you're connected to Tor. Navigate to <a href="https://check.torproject.org" class="pink-text">https://check.torproject.org</a>. You should see a congratulatory message and a notice displaying what your IP address appears to be.</p>
+        <img src="/img/checkorfox.png" class="materialboxed responsive-img z-depth-1" /><br />
+        <p><i>You are now anonymized and ready to browse torvalds.xyz!</i></p>
+        <h3><li>Navigate to torvalds.xyz</li></h3>
+        <p>Open Orfox and just enter <b>http://jm42gnsz55tcyohe.onion/</b> in the address bar. You can bookmark the page so you don't have to remember the URL by pressing the three dot menu and then the star.</p>
+        <img src="/img/navigate-android.png" class="materialboxed responsive-img z-depth-1" /><br />
+      </ol>
+    </div>
+  </div>
+  
+  <footer class="page-footer pink">
+    <div class="container">
+      <div class="row">
+        <div class="col m6 s12">
+          <h5 class="white-text">Disclaimer</h5>
+          <p class="grey-text text-lighten-4">Public Tokumei sites indexed here are run by third parties. Use at your own discretion. We do not run or recommend an official Tokumei site. We are not responsible for any content hosted by third-party sites.</p>
+        </div>
+        <div class="col m2 offset-m2 s6">
+          <ul>
+            <li><a class="white-text" href="mailto:hello@tokumei.co">Contact</a></li>
+            <li><a class="white-text" href="/donate">Donate</a></li>
+            <li><a class="white-text" href="/commercial">Commercial</a></li>
+            <li><a class="white-text" href="https://twitter.com/tokumeico">Twitter</a></li>
+          </ul>
+        </div>
+        <div class="col m2 s6">
+          <ul>
+            <li><a class="white-text" href="/releases/">Releases</a></li>
+            <li><a class="white-text" href="https://kfarwell.org/projects/tokumei/git/">Code</a></li>
+            <li><a class="white-text" href="/api">API</a></li>
+            <li><a class="white-text" href="/errata">Errata</a></li>
+            <li><a class="white-text" href="/assets">Assets</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <a href="https://kfarwell.org/" class="pink-text text-lighten-3">Kyle Farwell</a> | <a href="https://krourke.org/" class="pink-text text-lighten-3">Keefer Rourke</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/jquery-2.1.1.min.js"></script>
+  <script src="/js/materialize.js"></script>
+  <script src="/js/init.js"></script>
+</body>
+</html>
