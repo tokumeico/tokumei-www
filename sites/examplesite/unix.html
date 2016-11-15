@@ -46,7 +46,7 @@
           <div class="card">
             <form>
               <div class="card-content">
-                <a href="https://www.torproject.org/dist/torbrowser/6.0.5/tor-browser-linux32-6.0.5_en-US.tar.xz" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>
+                <a href="https://www.torproject.org/dist/torbrowser/6.0.6/tor-browser-linux32-6.0.6_en-US.tar.xz" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>
                 <div class="input-field">
                   <select name="language">
                     <option value="en-US" selected="selected">English</option>
@@ -70,7 +70,7 @@
               </div>
               <div class="card-action">
                 <a class="lang-alt pink-text" href="https://www.torproject.org/projects/torbrowser.html.en#downloads">Other Languages</a>
-                <a class="sig pink-text" href="https://www.torproject.org/dist/torbrowser/6.0.5/tor-browser-linux32-6.0.5_en-US.tar.xz.asc">Signature</a>
+                <a class="sig pink-text" href="https://www.torproject.org/dist/torbrowser/6.0.6/tor-browser-linux32-6.0.6_en-US.tar.xz.asc">Signature</a>
                 <a class="additional pink-text" href="https://www.torproject.org/projects/torbrowser.html.en#downloads-alpha">Unstable version</a><br>
               </div>
             </form>
@@ -80,7 +80,7 @@
           <div class="card">
             <form>
               <div class="card-content">
-                <a href="https://www.torproject.org/dist/torbrowser/6.0.5/tor-browser-linux64-6.0.5_en-US.tar.xz" class="btn-dl-64 btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download (64-bit)</a>
+                <a href="https://www.torproject.org/dist/torbrowser/6.0.6/tor-browser-linux64-6.0.6_en-US.tar.xz" class="btn-dl-64 btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download (64-bit)</a>
                 <div class="input-field">
                   <select name="language">
                     <option value="en-US" selected="selected">English</option>
@@ -104,7 +104,7 @@
               </div>
               <div class="card-action">
                 <a class="lang-alt pink-text" href="https://www.torproject.org/projects/torbrowser.html.en#downloads">Other Languages</a>
-                <a class="sig-64 pink-text" href="https://www.torproject.org/dist/torbrowser/6.0.5/tor-browser-linux64-6.0.5_en-US.tar.xz.asc">Signature</a>
+                <a class="sig-64 pink-text" href="https://www.torproject.org/dist/torbrowser/6.0.6/tor-browser-linux64-6.0.6_en-US.tar.xz.asc">Signature</a>
                 <a class="additional pink-text" href="https://www.torproject.org/projects/torbrowser.html.en#downloads-alpha">Unstable version</a><br>
               </div>
             </form>
@@ -187,8 +187,8 @@ Primary key fingerprint: EF6E 286D DA85 EA2A 4BA7  DE68 4E2C 6E87 9329 8290
   <script src="/js/init.js"></script>
   <script async type="text/javascript">
     function updateLang() {
-      var tbb = 'https://www.torproject.org/dist/torbrowser/6.0.5/tor-browser-linux32-6.0.5_'+$('select').val()+'.tar.xz'
-      var tbb64 = 'https://www.torproject.org/dist/torbrowser/6.0.5/tor-browser-linux64-6.0.5_'+$('select').val()+'.tar.xz'
+      var tbb = 'https://www.torproject.org/dist/torbrowser/6.0.6/tor-browser-linux32-6.0.6_'+$('select').val()+'.tar.xz'
+      var tbb64 = 'https://www.torproject.org/dist/torbrowser/6.0.6/tor-browser-linux64-6.0.6_'+$('select').val()+'.tar.xz'
       $('.btn-dl').replaceWith('<a href="'+tbb+'" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>');
       $('.btn-dl-64').replaceWith('<a href="'+tbb64+'" class="btn-dl-64 btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download (64-bit)</a>');
       $('.sig').replaceWith('<a class="sig pink-text" href="'+tbb+'.asc">Signature</a>');

@@ -43,7 +43,7 @@
       <div class="card">
         <form>
           <div class="card-content">
-            <a href="https://www.torproject.org/dist/torbrowser/6.0.5/torbrowser-install-6.0.5_en-US.exe" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>
+            <a href="https://www.torproject.org/dist/torbrowser/6.0.6/torbrowser-install-6.0.6_en-US.exe" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>
             <div class="input-field">
               <select name="language">
                 <option value="en-US" selected="selected">English</option>
@@ -67,7 +67,7 @@
           </div>
           <div class="card-action">
             <a class="lang-alt pink-text" href="https://www.torproject.org/projects/torbrowser.html.en#downloads">Other Languages</a>
-            <a class="sig pink-text" href="https://www.torproject.org/dist/torbrowser/6.0.5/torbrowser-install-6.0.5_en-US.exe.asc">Signature</a>
+            <a class="sig pink-text" href="https://www.torproject.org/dist/torbrowser/6.0.6/torbrowser-install-6.0.6_en-US.exe.asc">Signature</a>
             <a class="additional pink-text" href="https://www.torproject.org/projects/torbrowser.html.en#downloads-alpha">Unstable version</a><br>
           </div>
         </form>
@@ -132,7 +132,7 @@
   <script src="/js/init.js"></script>
   <script async type="text/javascript">
     function updateLang() {
-      var tbb = 'https://www.torproject.org/dist/torbrowser/6.0.5/torbrowser-install-6.0.5_'+$('select').val()+'.exe'
+      var tbb = 'https://www.torproject.org/dist/torbrowser/6.0.6/torbrowser-install-6.0.6_'+$('select').val()+'.exe'
       console.log(tbb);
       $('.btn-dl').replaceWith('<a href="'+tbb+'" class="btn-dl btn-large waves-effect waves-light pink"><i class="mdi mdi-download left"></i>Download</a>');
       $('.sig').replaceWith('<a class="sig pink-text" href="'+tbb+'.asc">Signature</a>');
