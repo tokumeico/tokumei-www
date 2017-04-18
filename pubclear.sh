@@ -158,7 +158,7 @@ service nginx start
 
 echo 'Installing Tokumei...'
 mkdir -p /var/www/$domain
-git clone https://git.kfarwell.org/tokumei /var/www/$domain
+git clone https://git.tokumei.co/tokumei/tokumei /var/www/$domain
 
 cd /var/www/$domain/sites
 ln -s tokumei.co $domain
