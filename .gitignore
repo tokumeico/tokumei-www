@@ -1,0 +1,12 @@
+# dumb os generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# vim temporary files
+*.swp
+*.swo
