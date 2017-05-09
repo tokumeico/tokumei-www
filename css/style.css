@@ -20,6 +20,23 @@ h1, h2, h3, h4, h5, h6, .brand-logo {
   font-family: "DejaVu Sans Extra Light", sans-serif;
 }
 
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+    margin: 0 0 20px 0;
+    border: 0;
+    border-top: 1px solid #e5e5e5;
+}
+
+.padding-medium-left-right {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.padding-small-bottom {
+    padding-bottom: 0.5em;
+}
+
 .icon-block {
   padding: 0 15px;
 }
